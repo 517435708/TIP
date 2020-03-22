@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{lastpage}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+
+
+
+\newcommand{\version}{v1.0.0}
+\newcommand{\lastPage}{6}
+\newcommand{\tab}{\hspace{1cm}}
+
+\pagestyle{fancy}
+\setlength
+\headheight{40pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhf{}
+
+\rhead{Dokumentacja projektu}
+\lhead{\includegraphics[width=5cm]{images/pp.jpg}\newline Wydział informatyki i telekomunikacji}
+
+\lfoot{Politechnika Poznańska}
+\cfoot{Page \thepage\space of\space \lastPage}
+\rfoot{19.03.2020r.}
+
+\begin{document}
+	\hyphenpenalty=100000
+	\exhyphenpenalty=100000
+\begin{titlepage}
+		\begin{center}
+		
+			\huge
+			\textbf{Dokumentacja projektu}
+			
+			\vspace{0.5cm}
+			
+			\large
+			Dokumentacja projektu z zajęć Telefonia IP
+			
+			\vspace{2.4cm}
+			
+			\LARGE
+			\textbf{Autorzy:}
+			
+			\vspace{0.3cm}
+			
+			Adrian Golczak 136239
+			adrian.e.golczak@student.put.poznan.pl
+			
+			\vspace{0.3cm}
+			
+			Marcin Kubiak 136267
+			marcin.w.kubiak@student.put.poznan.pl
+			
+			\vfill
+			
+			\normalsize
+			Wersja: \version
+			
+			\vspace{2cm}
+			
+			\LARGE
+			Politechnika Poznańska
+					
+			\vspace{0.3cm}
+			
+			\large
+			Wydział informatyki i telekomunikacji
+			
+			\vspace{0.6cm}
+			
+			19.03.2020 r.
+			
+		\end{center}
+\end{titlepage}
+\tableofcontents
+\newpage
+\section{Charakterystyka ogólna projektu}
+\input{charakterystyka.tex}
+\section{Architektura systemu}
+\input{architektura.tex}
+\section{Wymagania}
+\subsection{Funkcjonalne}
+\input{funkcjonalne.tex}
+\subsection{Niefunkcjonalne}
+\input{niefunkcjonalne.tex}
+\section{Technologie}
+\subsection{Narzędzia, środowisko, biblioteki, kodeki}
+\input{narzedzia.tex}
+\end{document}
