@@ -1,13 +1,11 @@
-\subsection{Uproszczona architektura technologii}
-\tab Funkcjonalnie, możliwe będzie połączenie dwóch clientów aplikacji mobilnej poprzez server napisany w spring boot framework.\\
-\includegraphics[width=12cm]{images/simple architecture.png}
-\begin{center}
-	\footnotesize
-	Rysunek 1. Uproszczona architektura systemu
-\end{center}
-\subsection{Architektura przepływu}
-\includegraphics[width=12cm]{images/flow.png}
-\begin{center}
-	\footnotesize
-	Rysunek 2. Architektura przepływu komunikacji pomiedzy użytkownikiem, klientem, a serwerem.
-\end{center}
+\justy{System oparty jest o architekturę klient - serwer. Aplikacja kliencka zainstalowana zostałą na urządzeniu mobilnym. Jej zadaniem jest udostępnienie interfejsu dla użytkownika w taki sposób aby w prosty sposób umożliwić korzystanie z usług serwera. Aplikacja zapewnia również poziom bezpieczeństwa szyfrując/deszyfrując aplikację (serwer pełni rolę pośrednika, nie uczestniczy w komunikacji, nie jest w stanie "podsłuchać" rozmowy, gdyż ta jest szyfrowana.) W architekturze definiujemy 3 byty uczestniczące w procesie komunikacji:}
+
+\begin{itemize}
+	\item \textit{Serwer} - aplikacja napisana w języku Java z użyciem frameworka Spring Boot. Jest instalowana na urządzeniu z wystarczającymi zasobami do zarządzania komunikacją (np. laptop, przy założeniu, że ilość rządań będzie nieznaczna).
+	\item \textit{Klient} - aplikacja na urządzenia mobilne z systemem Android.
+	\item \textit{Użytkownik} -\justy{osoba posiadająca zainstalowaną aplikację wraz z }wylosowanym (przez serwer) unikalnym id.
+	\item \textit{Osoba akceptująca połączenie} - \justy{jest to użytkownik, który otrzymał informację poprzez interfejs, że inny użytkownik chce się z nim połączyć.}
+\end{itemize}
+
+
+\justy{Użytkownik po uruchomieniu aplikacji klienckiej zostaje poproszony o wpisanie pseudonimu (pod warunkiem, że nie został już wpisany), następnie klient wysyła rządanie do serwera o "zarejestrowanie", rządanie składa się z wylosowanego uprzednio klucza publicznego, a także pseudonimu użytkownika. Serwer dodaje klienta do kolejki nadając mu unikalny identyfikator, od tej pory komunikacja oparta jest o ten identyfikator. W momencie w którym użytkownik zechce połączyć się innym użytkownikiem klient wysyła rządanie do serwera o sparowanie dwóch użytkowników (drugim jest osoba akceptująca połączenie). Jeśli połączenie zostanie zaakceptowane serwer tworzy sesję, a następnie wysyła odpowiednie komunikaty wraz z odpowiednimi kluczami publicznymi do klientów. Aplikacje mobilne używają kluczy publicznych do wylosowania 256 bitowego klucza AES po 128 bitów każdy, gdzie pierwsze 128 bitów należy do osoby rządającej połączenia, a ostatnie 128 bitów należy do osoby akceptującej. Obie strony wymieniają się zaszyfrowanymi częściami klucza, ostatnim krokiem jest potwierdzenie otrzymania części drugiej strony. Od tego momentu komunikacja jest szyfrowana AES-256, aż do zakończenia rozmowy.}
