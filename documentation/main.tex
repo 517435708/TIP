@@ -5,13 +5,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
+\usepackage{xstring}
 
 
+\usepackage[none]{hyphenat}
 
 
 \newcommand{\version}{v1.0.0}
-\newcommand{\lastPage}{5}
+\newcommand{\lastPage}{4}
 \newcommand{\tab}{\hspace{1cm}}
+\newcommand{\justy}[1]{
+\StrSubstitute{#1}{ }{ \hfill}
+}
+
 
 \pagestyle{fancy}
 \setlength
@@ -27,8 +33,6 @@
 \rfoot{19.03.2020r.}
 
 \begin{document}
-	\hyphenpenalty=100000
-	\exhyphenpenalty=100000
 \begin{titlepage}
 		\begin{center}
 			
@@ -79,18 +83,17 @@
 \end{titlepage}
 \tableofcontents
 \newpage
-\section{Charakterystyka ogólna projektu}
-\input{charakterystyka.tex}
-\newpage
-\section{Architektura systemu}
-\input{architektura.tex}
-\section{Wymagania}
-W tymże rozdziale skupimy sie na wymaganiach aplikacji z podziałem na funkcjonalne oraz niefunkcjonalne. Opiszemy konkretne wymagania dotyczące aktorów, użytkownika niezalogowanego oraz użytkownika zalogowanego.
-\subsection{Funkcjonalne}
-\input{funkcjonalne.tex}
-\subsection{Niefunkcjonalne}
-\input{niefunkcjonalne.tex}
-\section{Technologie, narzędzia, środowisko, biblioteki, kodeki}
+	\section{Charakterystyka ogólna projektu}
+	\input{charakterystyka.tex}
+	\section{Architektura systemu}
+	\input{architektura.tex}
+	\section{Wymagania}
+	Poniżej opisane zostaną wymagania funkcjonalne i niefunkcjonalne aplikacji, z wyróżnieniem różnych stanów użytkownika.
+	\subsection{Funkcjonalne}
+	\input{funkcjonalne.tex}
+	\subsection{Niefunkcjonalne}
+	\input{niefunkcjonalne.tex}
+	\section{Technologie, narzędzia, środowisko, biblioteki, kodeki}
+	\input{narzedzia.tex}
 
-\input{narzedzia.tex}
 \end{document}
