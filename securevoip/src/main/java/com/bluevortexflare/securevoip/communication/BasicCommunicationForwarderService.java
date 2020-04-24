@@ -18,16 +18,13 @@ public class BasicCommunicationForwarderService implements CommunicationForwarde
 
     private DatagramSocket socket;
     private UserSessionService sessionService;
-    private UserRegisterService registerService;
 
     private byte[] message = new byte[1024];
 
     public BasicCommunicationForwarderService(DatagramSocket socket,
-                                              UserSessionService sessionService,
-                                              UserRegisterService registerService) {
+                                              UserSessionService sessionService) {
         this.socket = socket;
         this.sessionService = sessionService;
-        this.registerService = registerService;
     }
 
     @Override

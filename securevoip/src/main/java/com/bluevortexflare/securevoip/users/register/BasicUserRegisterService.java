@@ -4,17 +4,15 @@ import com.bluevortexflare.securevoip.users.register.dto.RegisterRequest;
 import com.bluevortexflare.securevoip.users.register.dto.RegisterResponse;
 import org.springframework.stereotype.Service;
 
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.util.ArrayList;
+import javax.annotation.Resource;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class BasicUserRegisterService implements UserRegisterService {
 
-    private List<VoIPUser> users = new ArrayList<>();
+    @Resource(name = "waitingRoom")
+    private List<VoIPUser> users;
 
     @Override
     public RegisterResponse registerUser(RegisterRequest request) {
