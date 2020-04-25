@@ -10,26 +10,29 @@ import java.util.UUID;
 
 @Service
 public class BasicUserRegisterService implements UserRegisterService {
-
+    private int seq_number = 0;
     @Resource(name = "waitingRoom")
     private List<VoIPUser> users;
-
     @Override
     public RegisterResponse registerUser(RegisterRequest request) {
 
         String newNick = generateNickFromRequest(request.getNick());
         String userToken = UUID.randomUUID()
                                .toString();
-
         return addToWaitingRoom(newNick, userToken);
     }
 
-    private RegisterResponse addToWaitingRoom(String newNick, String sessionToken) {
-
-        return new RegisterResponse(newNick, sessionToken);
+    private RegisterResponse addToWaitingRoom(String newNick, String userToken) {
+     VoIPUser user = new VoIPUser();
+     user.setNick(newNick);
+     user.setUserToken(userToken);
+     users.add(user);
+     return new RegisterResponse(newNick, userToken);
     }
 
     private String generateNickFromRequest(String nick) {
-        return null;
+        String s = nick + " " + seq_number;
+        seq_number++;
+        return s;
     }
 }

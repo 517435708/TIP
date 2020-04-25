@@ -21,4 +21,7 @@ public class VoIPUser {
     private InetAddress addressIp = null;
 
     private boolean readyToTalk = true;
+
+
+
 }
