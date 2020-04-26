@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class BasicUserRegisterService implements UserRegisterService {
-
+    private AtomicInteger seqNumber = new AtomicInteger();
     @Resource(name = "waitingRoom")
     private List<VoIPUser> users;
 
@@ -20,16 +21,23 @@ public class BasicUserRegisterService implements UserRegisterService {
         String newNick = generateNickFromRequest(request.getNick());
         String userToken = UUID.randomUUID()
                                .toString();
-
-        return addToWaitingRoom(newNick, userToken);
+        String publicKey = request.getPublicKey();
+        return addToWaitingRoom(newNick, userToken, publicKey);
     }
 
-    private RegisterResponse addToWaitingRoom(String newNick, String sessionToken) {
-
-        return new RegisterResponse(newNick, sessionToken);
+    private RegisterResponse addToWaitingRoom(String newNick, String userToken, String publicKey) {
+        VoIPUser user = new VoIPUser();
+        user.setNick(newNick);
+        user.setUserToken(userToken);
+        user.setReadyToTalk(true);
+        user.setPublicKey(publicKey);
+        users.add(user);
+        return new RegisterResponse(newNick, userToken);
     }
 
     private String generateNickFromRequest(String nick) {
-        return null;
+        String s = nick + " " + seqNumber;
+        seqNumber.getAndIncrement();
+        return s;
     }
 }

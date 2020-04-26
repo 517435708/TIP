@@ -16,7 +16,7 @@ public class UserControler {
         this.registerService = registerService;
     }
 
-    @PostMapping("/register")
+    @PostMapping(value = "/register")
     public RegisterResponse register(@RequestBody RegisterRequest request) {
         return registerService.registerUser(request);
     }

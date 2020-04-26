@@ -61,6 +61,10 @@ public class BasicUserConnectionService implements UserConnectionService {
 
 
     private boolean userIsCurrentlyOnCall(String responderNick) {
-        return true;
+        return users.stream()
+                    .anyMatch(user -> user.getNick()
+                                          .equals(responderNick) && !user.isReadyToTalk());
     }
+
+
 }
