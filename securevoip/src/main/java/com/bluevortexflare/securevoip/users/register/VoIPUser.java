@@ -23,5 +23,4 @@ public class VoIPUser {
     private boolean readyToTalk = true;
 
 
-
 }
