@@ -13,17 +13,16 @@ import lombok.Setter;
 @RequiresApi(api = Build.VERSION_CODES.N)
 @Getter
 
-public class random128bit {
-    String randomText = "";
+public class Random128bit {
     String result = "";
     Random random = new Random();
 
-    public random128bit() {
-        for (int i = 0; i < 32; i++) {
+    public Random128bit() {
+        for (int i = 0; i < 16; i++) {
             int myRandomNumber = random.nextInt(0x10) + 0x10;
-            result = result + Integer.toHexString(myRandomNumber);
-            i++;
+            this.result += Integer.toHexString(myRandomNumber);
+
         }
-        this.randomText = result;
     }
+
 }
