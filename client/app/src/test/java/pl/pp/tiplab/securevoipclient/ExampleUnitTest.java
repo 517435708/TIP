@@ -1,5 +1,7 @@
 package pl.pp.tiplab.securevoipclient;
 
+import org.apache.commons.lang3.StringUtils;
+import org.hamcrest.core.StringContains;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,8 +12,19 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
+    Random128bit random = new Random128bit();
+
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void is32letters() {
+        assertTrue(random.getResult().length() == 32);
     }
+
+    @Test
+    public void isHexadecimal() {
+        String hexDigits = "abcdef0123456789";
+        assertTrue(StringUtils.containsOnly(random.getResult(), hexDigits));
+
+    }
+
 }
