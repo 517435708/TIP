@@ -6,16 +6,17 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{xstring}
-
-
+\usepackage{xcolor}
+\usepackage{indentfirst}
 \usepackage[none]{hyphenat}
 
 
 \newcommand{\version}{v1.0.0}
-\newcommand{\lastPage}{4}
+\newcommand{\lastPage}{5}
 \newcommand{\tab}{\hspace{1cm}}
 \newcommand{\justy}[1]{
 \StrSubstitute{#1}{ }{ \hfill}
+
 }
 
 
@@ -88,12 +89,15 @@
 	\section{Architektura systemu}
 	\input{architektura.tex}
 	\section{Wymagania}
-	Poniżej opisane zostaną wymagania funkcjonalne i niefunkcjonalne aplikacji, z wyróżnieniem różnych stanów użytkownika.
+	\justy{Poniżej opisane zostaną wymagania funkcjonalne i niefunkcjonalne aplikacji, z wyróżnieniem różnych stanów użytkownika.}
 	\subsection{Funkcjonalne}
 	\input{funkcjonalne.tex}
 	\subsection{Niefunkcjonalne}
 	\input{niefunkcjonalne.tex}
 	\section{Technologie, narzędzia, środowisko, biblioteki, kodeki}
 	\input{narzedzia.tex}
-
+	\section{Diagramy UML}
+	{W tym rozdziale skupimy się na 4 typach diagramów UML: przypadków użycia, przebiegów, stanów oraz klas.}
+	\subsection{Diagram przypadków użycia}
+	\input{DPU.tex}
 \end{document}
