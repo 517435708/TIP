@@ -9,10 +9,11 @@
 \usepackage{xcolor}
 \usepackage{indentfirst}
 \usepackage[none]{hyphenat}
+\usepackage{subfig}
+\usepackage{float}
 
-
-\newcommand{\version}{v1.0.0}
-\newcommand{\lastPage}{5}
+\newcommand{\version}{v1.0.3}
+\newcommand{\lastPage}{10}
 \newcommand{\tab}{\hspace{1cm}}
 \newcommand{\justy}[1]{
 \StrSubstitute{#1}{ }{ \hfill}
@@ -96,6 +97,9 @@
 	\input{niefunkcjonalne.tex}
 	\section{Technologie, narzędzia, środowisko, biblioteki, kodeki}
 	\input{narzedzia.tex}
+	\section{Ekrany}
+	\input{ekrany.tex}
+
 	\section{Diagramy UML}
 	{W tym rozdziale skupimy się na 4 typach diagramów UML: przypadków użycia, przebiegów, stanów oraz klas.}
 	\subsection{Diagram przypadków użycia}
