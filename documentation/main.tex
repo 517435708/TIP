@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage{lastpage}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{xstring}
+\usepackage{xcolor}
+\usepackage{indentfirst}
+\usepackage[none]{hyphenat}
+\usepackage{subfig}
+\usepackage{float}
+
+\newcommand{\version}{v1.0.3}
+\newcommand{\lastPage}{10}
+\newcommand{\tab}{\hspace{1cm}}
+\newcommand{\justy}[1]{
+\StrSubstitute{#1}{ }{ \hfill}
+
+}
+
+
+\pagestyle{fancy}
+\setlength
+\headheight{40pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhf{}
+
+\rhead{Dokumentacja projektu}
+\lhead{\includegraphics[width=5cm]{images/pp.jpg}\newline Wydział informatyki i telekomunikacji}
+
+\lfoot{Politechnika Poznańska}
+\cfoot{Page \thepage\space of\space \lastPage}
+\rfoot{19.03.2020r.}
+
+\begin{document}
+\begin{titlepage}
+		\begin{center}
+			
+						\LARGE
+			Politechnika Poznańska
+			
+			\vspace{0.3cm}
+			
+			\large
+			Wydział informatyki i telekomunikacji
+			
+			\vspace{3.0cm}
+			\huge
+			\textbf{Dokumentacja projektu}
+			
+			\vspace{0.5cm}
+			
+			\large
+			Dokumentacja projektu z zajęć Telefonia IP
+			
+			\vspace{2.4cm}
+			
+			\LARGE
+			\textbf{Autorzy:}
+			
+			\vspace{0.3cm}
+			
+			Adrian Golczak 136239
+			adrian.e.golczak@student.put.poznan.pl
+			
+			\vspace{0.3cm}
+			
+			Marcin Kubiak 136267
+			marcin.w.kubiak@student.put.poznan.pl
+			
+			\vfill
+			
+			\normalsize
+			Wersja: \version
+			
+			\vspace{2cm}
+			
+
+			
+			19.03.2020 r.
+			
+		\end{center}
+\end{titlepage}
+\tableofcontents
+\newpage
+	\section{Charakterystyka ogólna projektu}
+	\input{charakterystyka.tex}
+	\section{Architektura systemu}
+	\input{architektura.tex}
+	\section{Wymagania}
+	\justy{Poniżej opisane zostaną wymagania funkcjonalne i niefunkcjonalne aplikacji, z wyróżnieniem różnych stanów użytkownika.}
+	\subsection{Funkcjonalne}
+	\input{funkcjonalne.tex}
+	\subsection{Niefunkcjonalne}
+	\input{niefunkcjonalne.tex}
+	\section{Technologie, narzędzia, środowisko, biblioteki, kodeki}
+	\input{narzedzia.tex}
+	\section{Ekrany}
+	\input{ekrany.tex}
+
+	\section{Diagramy UML}
+	{W tym rozdziale skupimy się na 4 typach diagramów UML: przypadków użycia, przebiegów, stanów oraz klas.}
+	\subsection{Diagram przypadków użycia}
+	\input{DPU.tex}
+\end{document}
