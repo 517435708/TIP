@@ -1,11 +1,15 @@
 package com.bluevortexflare.securevoip.session;
 
 import com.bluevortexflare.securevoip.users.register.VoIPUser;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 class VoIPSession {
 
-    String sessionId;
+    private String sessionId;
 
-    VoIPUser initiator;
-    VoIPUser responder;
+    private VoIPUser initiator;
+    private VoIPUser responder;
 }

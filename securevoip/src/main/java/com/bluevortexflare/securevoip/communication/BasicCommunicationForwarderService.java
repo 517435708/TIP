@@ -2,6 +2,7 @@ package com.bluevortexflare.securevoip.communication;
 
 import com.bluevortexflare.securevoip.session.UserSessionService;
 import com.bluevortexflare.securevoip.users.register.UserRegisterService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +14,14 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class BasicCommunicationForwarderService implements CommunicationForwarderService {
 
 
-    private DatagramSocket socket;
-    private UserSessionService sessionService;
+    private final DatagramSocket socket;
+    private final UserSessionService sessionService;
 
     private byte[] message = new byte[1024];
-
-    public BasicCommunicationForwarderService(DatagramSocket socket,
-                                              UserSessionService sessionService) {
-        this.socket = socket;
-        this.sessionService = sessionService;
-    }
 
     @Override
     public void run() {
