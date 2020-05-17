@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface UserSessionService {
     Optional<InetAddress> getAddressFromSession(DatagramPacket datagram);
 
-    String createNewSession(String initiatorsToken, String respondersNick);
+    String createNewSession(String initiatorsToken);
 
     String killSession(String userToken, String sessionIdToken);
 
