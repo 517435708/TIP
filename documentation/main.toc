@@ -8,3 +8,7 @@
 \contentsline {section}{\numberline {5}Ekrany}{4}%
 \contentsline {section}{\numberline {6}Diagramy UML}{9}%
 \contentsline {subsection}{\numberline {6.1}Diagram przypadków użycia}{10}%
+\contentsline {subsection}{\numberline {6.2}Uproszczony diagram przepływu}{10}%
+\contentsline {section}{\numberline {7}Implementacja serwera}{12}%
+\contentsline {subsection}{\numberline {7.1}RegisterService}{12}%
+\contentsline {subsection}{\numberline {7.2}ConnectionService}{12}%
