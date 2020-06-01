@@ -3,8 +3,14 @@
 \contentsline {section}{\numberline {2}Architektura systemu}{2}%
 \contentsline {section}{\numberline {3}Wymagania}{3}%
 \contentsline {subsection}{\numberline {3.1}Funkcjonalne}{3}%
-\contentsline {subsection}{\numberline {3.2}Niefunkcjonalne}{4}%
+\contentsline {subsection}{\numberline {3.2}Niefunkcjonalne}{3}%
 \contentsline {section}{\numberline {4}Technologie, narzędzia, środowisko, biblioteki, kodeki}{4}%
-\contentsline {section}{\numberline {5}Ekrany}{5}%
-\contentsline {section}{\numberline {6}Diagramy UML}{9}%
-\contentsline {subsection}{\numberline {6.1}Diagram przypadków użycia}{10}%
+\contentsline {section}{\numberline {5}Opis najważniejszych protokołów}{4}%
+\contentsline {subsection}{\numberline {5.1}Protokół łączenia użytkowników}{5}%
+\contentsline {section}{\numberline {6}Ekrany}{5}%
+\contentsline {section}{\numberline {7}Diagramy UML}{10}%
+\contentsline {subsection}{\numberline {7.1}Diagram przypadków użycia}{11}%
+\contentsline {subsection}{\numberline {7.2}Uproszczony diagram przepływu}{11}%
+\contentsline {section}{\numberline {8}Implementacja serwera}{13}%
+\contentsline {subsection}{\numberline {8.1}RegisterService}{13}%
+\contentsline {subsection}{\numberline {8.2}ConnectionService}{13}%
