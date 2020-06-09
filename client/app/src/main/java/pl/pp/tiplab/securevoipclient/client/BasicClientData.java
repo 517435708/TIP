@@ -10,4 +10,5 @@ public class BasicClientData {
     private String userToken;
     private String privateKey;
     private String publicKey;
+    private String askKey;
 }

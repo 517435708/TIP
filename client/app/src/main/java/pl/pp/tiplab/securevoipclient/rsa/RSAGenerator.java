@@ -1,4 +1,4 @@
-package pl.pp.tiplab.securevoipclient.RSA;
+package pl.pp.tiplab.securevoipclient.rsa;
 
 import android.os.Build;
 
@@ -8,17 +8,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.security.*;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 @Getter

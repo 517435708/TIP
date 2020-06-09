@@ -1,14 +1,12 @@
-package pl.pp.tiplab.securevoipclient.RSA;
+package pl.pp.tiplab.securevoipclient.rsa;
 
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.nio.charset.Charset;
 import java.util.Random;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 @Getter

@@ -1,7 +1,6 @@
 package com.bluevortexflare.securevoip.communication;
 
 import com.bluevortexflare.securevoip.session.UserSessionService;
-import com.bluevortexflare.securevoip.users.register.UserRegisterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

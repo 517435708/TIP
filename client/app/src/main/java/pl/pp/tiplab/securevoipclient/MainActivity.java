@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import lombok.SneakyThrows;
 import org.springframework.web.client.RestTemplate;
-import pl.pp.tiplab.securevoipclient.RSA.RSAGenerator;
+import pl.pp.tiplab.securevoipclient.rsa.RSAGenerator;
 import pl.pp.tiplab.securevoipclient.Utils.IpUtil;
 import pl.pp.tiplab.securevoipclient.client.BasicClientData;
 import pl.pp.tiplab.securevoipclient.client.register.BasicClientRegister;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!register.isUserRegistered()) {
             RegisterRequest registerRequest = new RegisterRequest();
-            registerRequest.setNick();
+            registerRequest.setNick(//?);
             registerRequest.setPublicKey(rsaGenerator.getPublicKey().toString());
             registerRequest.setHost(IpUtil.getIPAddress(true));
             register.registerUser(registerRequest);
