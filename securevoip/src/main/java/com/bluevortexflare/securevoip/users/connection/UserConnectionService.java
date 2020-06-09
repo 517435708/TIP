@@ -7,6 +7,6 @@ public interface UserConnectionService {
     ConnectionResponse connect(String respondersToken, String sessionIdToken);
     ConnectionResponse refuse(String respondersToken, String sessionIdToken);
 
-    ConnectionResponse tryConnectWith(String initiatorsToken, String respondersToken);
+    ConnectionResponse tryConnectWith(String initiatorsToken, String responderNick);
     ConnectionResponse disconnect(String userToken, String sessionIdToken);
 }

@@ -1,8 +1,8 @@
 package pl.pp.tiplab.securevoipclient;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hamcrest.core.StringContains;
 import org.junit.Test;
+import pl.pp.tiplab.securevoipclient.RSA.Random128bit;
 
 import static org.junit.Assert.*;
 
