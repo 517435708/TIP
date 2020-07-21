@@ -12,3 +12,5 @@
 \contentsline {section}{\numberline {7}Implementacja serwera}{12}%
 \contentsline {subsection}{\numberline {7.1}RegisterService}{12}%
 \contentsline {subsection}{\numberline {7.2}ConnectionService}{12}%
+\contentsline {section}{\numberline {8}Implementacja klienta}{13}%
+\contentsline {subsection}{\numberline {8.1}sendMessage}{13}%
