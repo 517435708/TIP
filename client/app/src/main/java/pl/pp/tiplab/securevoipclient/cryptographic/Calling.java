@@ -103,9 +103,7 @@ public class Calling {
 
                     Log.e(LOG_TAG, "IOException: " + e.toString());
                     mic = false;
-                } catch (BadPaddingException e) {
-                    e.printStackTrace();
-                } catch (IllegalBlockSizeException e) {
+                } catch (BadPaddingException | IllegalBlockSizeException e) {
                     e.printStackTrace();
                 }
             }
