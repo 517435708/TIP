@@ -5,9 +5,6 @@ import android.content.Context;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
 import java.util.Scanner;
 
 import lombok.Getter;
@@ -92,9 +89,6 @@ public class BasicClientRegister extends GenericController implements ClientRegi
 
     private boolean fileReadData(File file) {
         try (Scanner scanner = new Scanner(file)) {
-            KeyFactory kf = KeyFactory.getInstance("RSA");
-            PrivateKey privKey = kf.generatePrivate();
-
             int lineCount = 0;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -117,7 +111,7 @@ public class BasicClientRegister extends GenericController implements ClientRegi
                 lineCount++;
             }
             return true;
-        } catch (IOException | NoSuchAlgorithmException ex) {
+        } catch (IOException ex) {
             return false;
         }
     }
