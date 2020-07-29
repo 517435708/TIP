@@ -2,9 +2,12 @@ package pl.pp.tiplab.securevoipclient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 import lombok.Getter;
@@ -22,14 +25,39 @@ public class ApplicationContext {
     private List<VoIPUser> users;
     private BasicClientData data;
     private AppCompatActivity context;
-    private DatagramSocket socket;
+
+    private Deque<String> receivedMessages;
+    private Deque<String> messagesToSend;
+
+    private boolean running = true;
 
     @SneakyThrows
     public ApplicationContext(AppCompatActivity context) {
-        socket = new DatagramSocket(APPLICATION_PORT, InetAddress.getLocalHost());
+        receivedMessages = new LinkedList<>();
+        messagesToSend = new LinkedList<>();
+        
         users = new ArrayList<>();
         data = new BasicClientData();
         this.context = context;
     }
 
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void send(String message) {
+        messagesToSend.add(message);
+    }
+
+    public void put(DatagramPacket pack) {
+        receivedMessages.add(new String(pack.getData()));
+    }
+
+    public String pop() {
+        return receivedMessages.getFirst();
+    }
+
+    public boolean isEmpty() {
+        return messagesToSend.isEmpty();
+    }
 }

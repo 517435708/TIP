@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import lombok.SneakyThrows;
 import pl.pp.tiplab.securevoipclient.client.BasicUserController;
 import pl.pp.tiplab.securevoipclient.client.UserController;
+import pl.pp.tiplab.securevoipclient.client.network.SocketTaskManager;
 import pl.pp.tiplab.securevoipclient.client.register.BasicClientRegister;
 import pl.pp.tiplab.securevoipclient.client.register.ClientRegister;
 import pl.pp.tiplab.securevoipclient.configuration.ButtonOnClickRegister;
@@ -24,11 +25,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ApplicationContext applicationContext = new ApplicationContext(this);
+        SocketTaskManager socketTaskManager = new SocketTaskManager(applicationContext);
+
         ClientRegister clientRegister = new BasicClientRegister(this);
         UserController userController = new BasicUserController();
         ButtonOnClickRegister buttonOnClickRegister = new ButtonOnClickRegister(applicationContext, clientRegister);
         ContextSwapper contextSwapper = new ContextSwapper(applicationContext, clientRegister, userController);
 
+        socketTaskManager.execute();
         buttonOnClickRegister.init();
         contextSwapper.startApplication();
     }

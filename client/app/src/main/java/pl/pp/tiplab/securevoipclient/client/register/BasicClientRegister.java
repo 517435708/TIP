@@ -16,11 +16,7 @@ import pl.pp.tiplab.securevoipclient.client.register.dto.RegisterRequest;
 import pl.pp.tiplab.securevoipclient.client.register.dto.RegisterResponse;
 import pl.pp.tiplab.securevoipclient.rsa.RsaCoverter;
 
-import static pl.pp.tiplab.securevoipclient.client.register.RegisterConstants.FILE_NAME;
-import static pl.pp.tiplab.securevoipclient.client.register.RegisterConstants.ONE;
-import static pl.pp.tiplab.securevoipclient.client.register.RegisterConstants.THREE;
-import static pl.pp.tiplab.securevoipclient.client.register.RegisterConstants.TWO;
-import static pl.pp.tiplab.securevoipclient.client.register.RegisterConstants.ZERO;
+import static pl.pp.tiplab.securevoipclient.client.register.RegisterConstants.*;
 
 @Setter
 @Getter
@@ -52,7 +48,7 @@ public class BasicClientRegister extends GenericController implements ClientRegi
         RegisterResponse response = registerService.registerUser(request);
         basicClientData.setNickName(response.getNick());
         basicClientData.setUserToken(response.getUserToken());
-        return response;
+        return createFile(response);
     }
 
 
