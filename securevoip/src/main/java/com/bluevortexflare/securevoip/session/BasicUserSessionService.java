@@ -15,9 +15,9 @@ import java.util.UUID;
 @Service
 public class BasicUserSessionService implements UserSessionService {
 
-    List<VoIPSession> sessions = new ArrayList<>();
+    private List<VoIPSession> sessions = new ArrayList<>();
     @Resource(name = "waitingRoom")
-    List<VoIPUser> users;
+    private List<VoIPUser> users;
 
 
     @Override

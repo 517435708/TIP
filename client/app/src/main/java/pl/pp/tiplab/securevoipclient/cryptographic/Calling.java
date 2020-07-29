@@ -22,7 +22,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-public class Calling {
+public class Calling implements Caller{
     private final String key = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; //lenght64 AES 256
     private static final String LOG_TAG = "AudioCall";
     private static final int SAMPLE_RATE = 8000; // Hertz
@@ -40,79 +40,76 @@ public class Calling {
     }
 
 
+    @Override
     public void sendMessage() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
         // Creates the thread for capturing and transmitting audio
         byte[] encryptKey = key.getBytes();
         SecretKeySpec secretKeySpec = new SecretKeySpec(encryptKey,"AES");
-        Cipher cipher = Cipher.getInstance("AES");
+        @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.ENCRYPT_MODE,secretKeySpec);
         mic = true;
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                System.out.println(secretKeySpec);
-                // Create an instance of the AudioRecord class
-                Log.i(LOG_TAG, "Send thread started. Thread id: " + Thread.currentThread().getId());
-                AudioRecord audioRecorder = new AudioRecord (MediaRecorder.AudioSource.VOICE_COMMUNICATION, SAMPLE_RATE,
-                        AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT,
-                        AudioRecord.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)*10);
-                int bytes_read = 0;
-                int bytes_sent = 0;
-                byte[] buf = new byte[BUF_SIZE];
-                byte[] encryptedData;
-                try {
-                    // Create a socket and start recording
-                    Log.i(LOG_TAG, "Packet destination: " + address.toString());
-                    DatagramSocket socket = new DatagramSocket();
-                    audioRecorder.startRecording();
-                    while(mic) {
-                        // Capture audio from the mic and transmit it
-                        bytes_read = audioRecorder.read(buf, 0, BUF_SIZE);
-                        encryptedData = cipher.doFinal(buf);
-                        DatagramPacket packet = new DatagramPacket(encryptedData, bytes_read, address, port);
-                        socket.send(packet);
-                        bytes_sent += bytes_read;
-                        Log.i(LOG_TAG, "Total bytes sent: " + bytes_sent);
-                        Thread.sleep(SAMPLE_INTERVAL, 0);
-                    }
-                    // Stop recording and release resources
-                    audioRecorder.stop();
-                    audioRecorder.release();
-                    socket.disconnect();
-                    socket.close();
-                    mic = false;
-                    return;
+        Thread thread = new Thread(() -> {
+            System.out.println(secretKeySpec);
+            // Create an instance of the AudioRecord class
+            Log.i(LOG_TAG, "Send thread started. Thread id: " + Thread.currentThread().getId());
+            AudioRecord audioRecorder = new AudioRecord (MediaRecorder.AudioSource.VOICE_COMMUNICATION, SAMPLE_RATE,
+                    AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT,
+                    AudioRecord.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)*10);
+            int bytes_read = 0;
+            int bytes_sent = 0;
+            byte[] buf = new byte[BUF_SIZE];
+            byte[] encryptedData;
+            try {
+                // Create a socket and start recording
+                Log.i(LOG_TAG, "Packet destination: " + address.toString());
+                DatagramSocket socket = new DatagramSocket();
+                audioRecorder.startRecording();
+                while(mic) {
+                    // Capture audio from the mic and transmit it
+                    bytes_read = audioRecorder.read(buf, 0, BUF_SIZE);
+                    encryptedData = cipher.doFinal(buf);
+                    DatagramPacket packet = new DatagramPacket(encryptedData, bytes_read, address, port);
+                    socket.send(packet);
+                    bytes_sent += bytes_read;
+                    Log.i(LOG_TAG, "Total bytes sent: " + bytes_sent);
+                    Thread.sleep(SAMPLE_INTERVAL, 0);
                 }
-                catch(InterruptedException e) {
+                // Stop recording and release resources
+                audioRecorder.stop();
+                audioRecorder.release();
+                socket.disconnect();
+                socket.close();
+                mic = false;
+            }
+            catch(InterruptedException e) {
 
-                    Log.e(LOG_TAG, "InterruptedException: " + e.toString());
-                    mic = false;
-                }
-                catch(SocketException e) {
+                Log.e(LOG_TAG, "InterruptedException: " + e.toString());
+                mic = false;
+            }
+            catch(SocketException e) {
 
-                    Log.e(LOG_TAG, "SocketException: " + e.toString());
-                    mic = false;
-                }
-                catch(UnknownHostException e) {
+                Log.e(LOG_TAG, "SocketException: " + e.toString());
+                mic = false;
+            }
+            catch(UnknownHostException e) {
 
-                    Log.e(LOG_TAG, "UnknownHostException: " + e.toString());
-                    mic = false;
-                }
-                catch(IOException e) {
+                Log.e(LOG_TAG, "UnknownHostException: " + e.toString());
+                mic = false;
+            }
+            catch(IOException e) {
 
-                    Log.e(LOG_TAG, "IOException: " + e.toString());
-                    mic = false;
-                } catch (BadPaddingException e) {
-                    e.printStackTrace();
-                } catch (IllegalBlockSizeException e) {
-                    e.printStackTrace();
-                }
+                Log.e(LOG_TAG, "IOException: " + e.toString());
+                mic = false;
+            } catch (BadPaddingException e) {
+                e.printStackTrace();
+            } catch (IllegalBlockSizeException e) {
+                e.printStackTrace();
             }
         });
         thread.start();
     }
 
+    @Override
     public void receiveMessage() {
         // Creates the thread for receiving and playing back audio
         if(!speakers) {
@@ -145,7 +142,6 @@ public class Calling {
                         track.flush();
                         track.release();
                         speakers = false;
-                        return;
                     }
                     catch(SocketException e) {
 

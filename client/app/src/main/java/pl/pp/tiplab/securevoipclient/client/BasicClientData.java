@@ -1,5 +1,8 @@
 package pl.pp.tiplab.securevoipclient.client;
 
+import java.security.PrivateKey;
+import java.security.PublicKey;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +11,7 @@ import lombok.Setter;
 public class BasicClientData {
     private String nickName;
     private String userToken;
-    private String privateKey;
-    private String publicKey;
+    private PrivateKey privateKey;
+    private PublicKey publicKey;
     private String askKey;
 }

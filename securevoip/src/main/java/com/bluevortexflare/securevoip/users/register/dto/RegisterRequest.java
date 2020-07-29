@@ -7,6 +7,5 @@ import lombok.Setter;
 @Setter
 public class RegisterRequest {
     private String nick;
-    private String host;
     private String publicKey;
 }

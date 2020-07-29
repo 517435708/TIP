@@ -32,11 +32,11 @@ public class BasicUserRegisterService implements UserRegisterService {
         user.setReadyToTalk(true);
         user.setPublicKey(publicKey);
         users.add(user);
-        return new RegisterResponse(newNick, userToken);
+        return new RegisterResponse(newNick, userToken, users);
     }
 
     private String generateNickFromRequest(String nick) {
-        String s = nick + " " + seqNumber;
+        String s = nick + "#" + seqNumber;
         seqNumber.getAndIncrement();
         return s;
     }

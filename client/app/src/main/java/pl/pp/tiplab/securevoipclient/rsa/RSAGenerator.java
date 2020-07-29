@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 
 import java.security.*;
 import java.util.Base64;
@@ -21,7 +22,8 @@ public class RSAGenerator {
     private PrivateKey privateKey;
     private PublicKey publicKey;
 
-    public RSAGenerator() throws NoSuchAlgorithmException {
+    @SneakyThrows
+    public RSAGenerator() {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
         keyGen.initialize(1024);
         KeyPair pair = keyGen.generateKeyPair();
