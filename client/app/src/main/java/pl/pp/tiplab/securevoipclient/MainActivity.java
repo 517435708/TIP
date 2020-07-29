@@ -13,7 +13,6 @@ import pl.pp.tiplab.securevoipclient.client.register.BasicClientRegister;
 import pl.pp.tiplab.securevoipclient.client.register.ClientRegister;
 import pl.pp.tiplab.securevoipclient.configuration.ButtonOnClickRegister;
 import pl.pp.tiplab.securevoipclient.contextswapper.ContextSwapper;
-import pl.pp.tiplab.securevoipclient.rsa.RSAGenerator;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,11 +24,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ApplicationContext applicationContext = new ApplicationContext(this);
-        ClientRegister clientRegister = new BasicClientRegister(this, new RSAGenerator());
+        ClientRegister clientRegister = new BasicClientRegister(this);
         UserController userController = new BasicUserController();
         ButtonOnClickRegister buttonOnClickRegister = new ButtonOnClickRegister(applicationContext, clientRegister);
         ContextSwapper contextSwapper = new ContextSwapper(applicationContext, clientRegister, userController);
 
+        buttonOnClickRegister.init();
         contextSwapper.startApplication();
     }
 }
