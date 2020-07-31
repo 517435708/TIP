@@ -25,15 +25,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ApplicationContext applicationContext = new ApplicationContext(this);
-        SocketTaskManager socketTaskManager = new SocketTaskManager(applicationContext);
+     //   SocketTaskManager socketTaskManager = new SocketTaskManager(applicationContext);
 
         ClientRegister clientRegister = new BasicClientRegister(this);
         UserController userController = new BasicUserController();
         ButtonOnClickRegister buttonOnClickRegister = new ButtonOnClickRegister(applicationContext, clientRegister);
         ContextSwapper contextSwapper = new ContextSwapper(applicationContext, clientRegister, userController);
 
-        socketTaskManager.execute();
-        buttonOnClickRegister.init();
+        //socketTaskManager.execute();
         contextSwapper.startApplication();
+        buttonOnClickRegister.init();
     }
 }

@@ -35,7 +35,7 @@ public class ApplicationContext {
     public ApplicationContext(AppCompatActivity context) {
         receivedMessages = new LinkedList<>();
         messagesToSend = new LinkedList<>();
-        
+
         users = new ArrayList<>();
         data = new BasicClientData();
         this.context = context;

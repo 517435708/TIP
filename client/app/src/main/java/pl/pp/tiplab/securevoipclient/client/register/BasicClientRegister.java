@@ -14,6 +14,7 @@ import pl.pp.tiplab.securevoipclient.GenericController;
 import pl.pp.tiplab.securevoipclient.client.BasicClientData;
 import pl.pp.tiplab.securevoipclient.client.register.dto.RegisterRequest;
 import pl.pp.tiplab.securevoipclient.client.register.dto.RegisterResponse;
+import pl.pp.tiplab.securevoipclient.rsa.MockedRsaConverter;
 import pl.pp.tiplab.securevoipclient.rsa.RsaCoverter;
 
 import static pl.pp.tiplab.securevoipclient.client.register.RegisterConstants.*;
@@ -25,7 +26,7 @@ public class BasicClientRegister extends GenericController implements ClientRegi
     private BasicClientData basicClientData;
     private Context context;
     private RegisterService registerService;
-    private RsaCoverter rsaCoverter;
+    private RsaCoverter rsaCoverter = new MockedRsaConverter();
 
     public BasicClientRegister(Context context) {
         super();
@@ -36,8 +37,7 @@ public class BasicClientRegister extends GenericController implements ClientRegi
     @Override
     public boolean isUserRegistered() {
         if(configFileExist()) {
-            readDataFromConfigFile();
-            return true;
+            return readDataFromConfigFile();
         } else {
             return false;
         }
@@ -69,10 +69,10 @@ public class BasicClientRegister extends GenericController implements ClientRegi
         }
     }
 
-    private void readDataFromConfigFile() {
+    private boolean readDataFromConfigFile() {
         String filePath = context.getFilesDir().getPath() + FILE_NAME;
         File file = new File(filePath);
-        fileReadData(file);
+        return fileReadData(file);
     }
 
     private boolean configFileExist() {

@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static pl.pp.tiplab.securevoipclient.ApplicationConstants.APPLICATION_HOST;
+import static pl.pp.tiplab.securevoipclient.ApplicationConstants.APPLICATION_ENDPOINT;
 
 public class GenericController {
 
@@ -16,7 +16,7 @@ public class GenericController {
         Gson gson = new GsonBuilder().setLenient()
                                      .create();
         retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create(gson))
-                                         .baseUrl(APPLICATION_HOST)
+                                         .baseUrl(APPLICATION_ENDPOINT)
                                          .build();
     }
 
