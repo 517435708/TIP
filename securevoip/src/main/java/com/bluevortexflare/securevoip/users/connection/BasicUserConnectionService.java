@@ -26,7 +26,6 @@ public class BasicUserConnectionService implements UserConnectionService {
     @Override
     public ConnectionResponse connect(String respondersSessionToken, String sessionIdToken) {
         sessionService.addUserToSession(respondersSessionToken, sessionIdToken);
-
         return new ConnectionResponse(OK);
     }
 
@@ -34,7 +33,6 @@ public class BasicUserConnectionService implements UserConnectionService {
     public ConnectionResponse refuse(String respondersSessionToken, String sessionIdToken) {
         String initiatorsToken = sessionService.killSession(respondersSessionToken, sessionIdToken);
         forwarderService.sendRefuseMessage(initiatorsToken);
-
         return new ConnectionResponse(OK);
     }
 

@@ -1,5 +1,7 @@
 package pl.pp.tiplab.securevoipclient.contextswapper;
 
+import android.os.AsyncTask;
+
 import lombok.RequiredArgsConstructor;
 import pl.pp.tiplab.securevoipclient.ApplicationContext;
 import pl.pp.tiplab.securevoipclient.R;
@@ -17,12 +19,26 @@ public class ContextSwapper {
 
     public void startApplication() {
         if (register.isUserRegistered()) {
-            context.setUsers(userController.getUsersFromServer());
-            context.getContext().setContentView(R.layout.waiting_room_activity);
+            swapToWaitingRoom();
         } else {
-            context.getContext().setContentView(R.layout.register_activity);
+            context.getContext()
+                   .setContentView(R.layout.register_activity);
         }
     }
 
 
+    public void swapToWaitingRoom() {
+        if (context.getUsers() == null) {
+            AsyncTask.execute(() -> {
+                context.setUsers(userController.getUsersFromServer());
+                context.getContext()
+                       .runOnUiThread(() -> context.getContext()
+                                                   .setContentView(R.layout.waiting_room_activity));
+            });
+        } else {
+            context.getContext()
+                   .runOnUiThread(() -> context.getContext()
+                                               .setContentView(R.layout.waiting_room_activity));
+        }
+    }
 }

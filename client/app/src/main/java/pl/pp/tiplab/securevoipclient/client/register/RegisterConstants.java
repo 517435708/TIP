@@ -7,5 +7,5 @@ class RegisterConstants {
     static final int TWO = 2;
     static final int THREE = 3;
     static final String FILE_NAME = "/config.dat";
-    static final String REGISTER_ENDPOINT = "/api/client/register";
+    static final String REGISTER_ENDPOINT = "/api/user/register";
 }

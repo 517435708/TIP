@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static pl.pp.tiplab.securevoipclient.ApplicationConstants.APPLICATION_ENDPOINT;
@@ -17,6 +18,7 @@ public class GenericController {
                                      .create();
         retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create(gson))
                                          .baseUrl(APPLICATION_ENDPOINT)
+                                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                                          .build();
     }
 

@@ -17,21 +17,21 @@ public class SessionController {
         this.connectionService = userConnectionService;
     }
 
-    @GetMapping("/connect")
-    public ConnectionResponse connect(@RequestHeader String initiatorsToken,
-                                      @RequestParam String responderNick) {
+    @GetMapping("/tryConnect")
+    public ConnectionResponse tryConnect(@RequestHeader String initiatorsToken,
+                                         @RequestParam String responderNick) {
         return connectionService.tryConnectWith(initiatorsToken, responderNick);
     }
 
-    @GetMapping("/connect/accept")
+    @GetMapping("/connection/accept")
     public ConnectionResponse acceptConnection(@RequestHeader String respondersToken,
                                                @RequestParam String sessionIdToken) {
         return connectionService.connect(respondersToken, sessionIdToken);
     }
 
     @GetMapping("/connection/refuse")
-    public ConnectionResponse connectionRespons(@RequestParam String sessionIdToken,
-                                                @RequestHeader String respondersToken) {
+    public ConnectionResponse refuseConnection(@RequestParam String sessionIdToken,
+                                               @RequestHeader String respondersToken) {
         return connectionService.refuse(respondersToken, sessionIdToken);
     }
 

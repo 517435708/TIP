@@ -9,7 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import lombok.SneakyThrows;
 import pl.pp.tiplab.securevoipclient.client.BasicUserController;
 import pl.pp.tiplab.securevoipclient.client.UserController;
-import pl.pp.tiplab.securevoipclient.client.network.SocketTaskManager;
+import pl.pp.tiplab.securevoipclient.client.connection.BasicClientConnector;
+import pl.pp.tiplab.securevoipclient.client.connection.ClientConnector;
+import pl.pp.tiplab.securevoipclient.client.network.ClientListen;
+import pl.pp.tiplab.securevoipclient.client.network.ClientSend;
 import pl.pp.tiplab.securevoipclient.client.register.BasicClientRegister;
 import pl.pp.tiplab.securevoipclient.client.register.ClientRegister;
 import pl.pp.tiplab.securevoipclient.configuration.ButtonOnClickRegister;
@@ -25,14 +28,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ApplicationContext applicationContext = new ApplicationContext(this);
-     //   SocketTaskManager socketTaskManager = new SocketTaskManager(applicationContext);
 
-        ClientRegister clientRegister = new BasicClientRegister(this);
+        ClientListen clientListen = new ClientListen(applicationContext.getReceivedMessages());
+        ClientSend clientSend = new ClientSend(applicationContext.getMessagesToSend());
+
+        ClientConnector clientConnector = new BasicClientConnector();
+        ClientRegister clientRegister = new BasicClientRegister(applicationContext);
         UserController userController = new BasicUserController();
-        ButtonOnClickRegister buttonOnClickRegister = new ButtonOnClickRegister(applicationContext, clientRegister);
-        ContextSwapper contextSwapper = new ContextSwapper(applicationContext, clientRegister, userController);
+        ButtonOnClickRegister buttonOnClickRegister = new ButtonOnClickRegister(applicationContext,
+                                                                                clientRegister,
+                                                                                clientConnector);
+        ContextSwapper contextSwapper = new ContextSwapper(applicationContext,
+                                                           clientRegister,
+                                                           userController);
+        applicationContext.setSwapper(contextSwapper);
+        applicationContext.setRegister(buttonOnClickRegister);
 
-        //socketTaskManager.execute();
         contextSwapper.startApplication();
         buttonOnClickRegister.init();
     }

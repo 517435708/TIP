@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.pp.tiplab.securevoipclient.user.VoIPUser;
+import pl.pp.tiplab.securevoipclient.client.user.VoIPUser;
 
 @Getter
 @Setter

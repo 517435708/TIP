@@ -6,9 +6,9 @@ import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 
 public interface RsaCoverter {
-    PrivateKey privateKeyFromString(String privateKey) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    PrivateKey privateKeyFromString(String privateKey);
     String stringFromPrivateKey(PrivateKey privateKey);
 
     String stringFromPublicKey(PublicKey publicKey);
-    PublicKey publicKeyFromString(String publicKey) throws InvalidKeySpecException, NoSuchAlgorithmException;
+    PublicKey publicKeyFromString(String publicKey);
 }
