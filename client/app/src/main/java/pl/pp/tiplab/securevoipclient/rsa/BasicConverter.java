@@ -1,5 +1,7 @@
 package pl.pp.tiplab.securevoipclient.rsa;
 
+import android.os.Build;
+
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -10,6 +12,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 public class BasicConverter implements RsaCoverter {
+
 
     @Override
     public PrivateKey privateKeyFromString(String privateKey) {
