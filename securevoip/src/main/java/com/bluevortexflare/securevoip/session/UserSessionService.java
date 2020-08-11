@@ -6,9 +6,9 @@ import java.net.InetAddress;
 import java.util.Optional;
 
 public interface UserSessionService {
-    Optional<InetAddress> getAddressFromSession(DatagramPacket datagram);
+    Optional<InetAddress> getOppositeAddressFromSession(DatagramPacket datagram);
 
-    String createNewSession(String initiatorsToken, String respondersNick);
+    String createNewSession(String initiatorsToken);
 
     String killSession(String userToken, String sessionIdToken);
 
