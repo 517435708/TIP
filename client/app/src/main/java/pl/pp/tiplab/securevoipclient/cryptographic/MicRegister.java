@@ -8,6 +8,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 public interface MicRegister {
-    byte[] sendVoiceMessage() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException;
-    void receiveMessage(byte[] encryptedVoice) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException;
+    byte[] sendVoiceMessage();
+    void receiveMessage(byte[] encryptedVoice);
 }

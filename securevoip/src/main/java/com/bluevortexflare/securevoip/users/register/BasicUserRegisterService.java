@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class BasicUserRegisterService implements UserRegisterService {
-    private AtomicInteger seqNumber = new AtomicInteger();
+    private AtomicInteger seqNumber = new AtomicInteger(1);
     @Resource(name = "waitingRoom")
     private List<VoIPUser> users;
 

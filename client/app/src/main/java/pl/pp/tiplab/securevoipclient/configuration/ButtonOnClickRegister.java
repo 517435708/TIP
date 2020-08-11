@@ -1,12 +1,15 @@
 package pl.pp.tiplab.securevoipclient.configuration;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
+
+import javax.crypto.Cipher;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -20,6 +23,7 @@ import pl.pp.tiplab.securevoipclient.client.register.dto.RegisterRequest;
 import pl.pp.tiplab.securevoipclient.client.register.dto.RegisterResponse;
 import pl.pp.tiplab.securevoipclient.client.user.VoIPUser;
 import pl.pp.tiplab.securevoipclient.rsa.RSAGenerator;
+import pl.pp.tiplab.securevoipclient.rsa.Random128bit;
 
 @Setter
 @RequiredArgsConstructor
@@ -32,7 +36,7 @@ public class ButtonOnClickRegister {
 
     public void init() {
         context.getContext()
-               .findViewById(R.id.heheheheh_xD)
+               .findViewById(R.id.end_call_button)
                .setOnClickListener(this::registerButtonCall);
     }
 
@@ -58,6 +62,7 @@ public class ButtonOnClickRegister {
             context.getData()
                    .setUserToken(response.getUserToken());
             context.setUsers(response.getUsers());
+            context.send(response.getUserToken().getBytes());
             context.update();
         });
     }
@@ -67,18 +72,30 @@ public class ButtonOnClickRegister {
     }
 
     public synchronized void callButton(View view) {
-        Map<String, String> callingUsersBySessionToken = context.getCallingUsersBySessionToken();
+        int color = ((ColorDrawable) view.getBackground()).getColor();
 
-        VoIPConnectionRequest request = new VoIPConnectionRequest();
-        request.setUserToken(context.getData().getUserToken());
-
-        if (callingUsersBySessionToken.containsKey(data.getNick())) {
-            request.setSessionId(callingUsersBySessionToken.get(data.getNick()));
-            clientConnector.acceptConnection(request);
+        if (color == Color.CYAN) {
+            context.acceptUser(((Button) view).getText());
         } else {
-            request.setResponderNick(data.getNick());
-            clientConnector.tryConnectWith(request);
+            Map<String, String> callingUsersBySessionToken = context.getCallingUsersBySessionToken();
+
+            VoIPConnectionRequest request = new VoIPConnectionRequest();
+            request.setUserToken(context.getData().getUserToken());
+
+            if (callingUsersBySessionToken.containsKey(data.getNick())) {
+                request.setSessionId(callingUsersBySessionToken.get(data.getNick()));
+                clientConnector.acceptConnection(request);
+            } else {
+                request.setResponderNick(data.getNick());
+                context.updateTalker(data.getNick());
+                clientConnector.tryConnectWith(request);
+            }
         }
     }
 
+    @SneakyThrows
+    public void endCall(View view) {
+        context.getMessagesToSend().put("END".getBytes());
+        context.update();
+    }
 }

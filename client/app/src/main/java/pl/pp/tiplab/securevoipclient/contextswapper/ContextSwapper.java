@@ -41,4 +41,12 @@ public class ContextSwapper {
                                                .setContentView(R.layout.waiting_room_activity));
         }
     }
+
+    public void swapToCallingRoom() {
+        AsyncTask.execute(() -> {
+            context.getContext()
+                   .runOnUiThread(() -> context.getContext()
+                                               .setContentView(R.layout.calling_activity));
+        });
+    }
 }

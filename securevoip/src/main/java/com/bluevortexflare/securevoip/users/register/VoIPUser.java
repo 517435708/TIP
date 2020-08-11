@@ -15,7 +15,7 @@ public class VoIPUser {
     private String publicKey;
     private String userToken;
     private InetAddress addressIp = null;
-    private boolean readyToTalk = true;
+    private boolean readyToTalk = false;
 
 
 }

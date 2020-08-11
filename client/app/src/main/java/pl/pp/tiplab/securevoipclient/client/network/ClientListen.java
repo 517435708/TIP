@@ -7,26 +7,24 @@ import java.net.DatagramSocket;
 import java.util.concurrent.BlockingQueue;
 
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 
-import static pl.pp.tiplab.securevoipclient.ApplicationConstants.APPLICATION_PORT;
 import static pl.pp.tiplab.securevoipclient.client.network.NetworkConstants.MAX_MESSAGE_RECEIVED;
 
 @AllArgsConstructor
 public class ClientListen implements Runnable {
 
+    static final int LISTEN_CLIENT_PORT = 1337;
     private BlockingQueue<byte[]> data;
 
     @Override
     public void run() {
         boolean run = true;
         while (run) {
-            try (DatagramSocket udpSocket = new DatagramSocket(APPLICATION_PORT)){
+            try (DatagramSocket udpSocket = new DatagramSocket(LISTEN_CLIENT_PORT)){
                 byte[] message = new byte[MAX_MESSAGE_RECEIVED];
                 DatagramPacket packet = new DatagramPacket(message,message.length);
                 udpSocket.receive(packet);
-                String text = new String(message, 0, packet.getLength());
-                System.out.println(text);
+                data.add(message);
             }catch (IOException e) {
                 run = false;
             }
