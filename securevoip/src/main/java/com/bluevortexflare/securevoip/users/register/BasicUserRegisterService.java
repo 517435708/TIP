@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class BasicUserRegisterService implements UserRegisterService {
-    private AtomicInteger seqNumber = new AtomicInteger();
+    private AtomicInteger seqNumber = new AtomicInteger(1);
     @Resource(name = "waitingRoom")
     private List<VoIPUser> users;
 
@@ -32,11 +32,11 @@ public class BasicUserRegisterService implements UserRegisterService {
         user.setReadyToTalk(true);
         user.setPublicKey(publicKey);
         users.add(user);
-        return new RegisterResponse(newNick, userToken);
+        return new RegisterResponse(newNick, userToken, users);
     }
 
     private String generateNickFromRequest(String nick) {
-        String s = nick + " " + seqNumber;
+        String s = nick + "#" + seqNumber;
         seqNumber.getAndIncrement();
         return s;
     }

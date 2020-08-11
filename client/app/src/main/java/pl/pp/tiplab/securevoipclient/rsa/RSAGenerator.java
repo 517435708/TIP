@@ -1,4 +1,4 @@
-package pl.pp.tiplab.securevoipclient.RSA;
+package pl.pp.tiplab.securevoipclient.rsa;
 
 import android.os.Build;
 
@@ -6,19 +6,14 @@ import androidx.annotation.RequiresApi;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 
 import java.security.*;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 @Getter
@@ -27,7 +22,8 @@ public class RSAGenerator {
     private PrivateKey privateKey;
     private PublicKey publicKey;
 
-    public RSAGenerator() throws NoSuchAlgorithmException {
+    @SneakyThrows
+    public RSAGenerator() {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
         keyGen.initialize(1024);
         KeyPair pair = keyGen.generateKeyPair();

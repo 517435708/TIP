@@ -15,25 +15,24 @@ import java.util.UUID;
 @Service
 public class BasicUserSessionService implements UserSessionService {
 
-    List<VoIPSession> sessions = new ArrayList<>();
+    private List<VoIPSession> sessions = new ArrayList<>();
     @Resource(name = "waitingRoom")
-    List<VoIPUser> users;
+    private List<VoIPUser> users;
 
 
     @Override
-    public Optional<InetAddress> getAddressFromSession(DatagramPacket datagram) {
-
-        String message = new String(datagram.getData());
-
+    public Optional<InetAddress> getOppositeAddressFromSession(DatagramPacket datagram) {
         for (var session : sessions) {
-            if (message.contains(session.getSessionId())) {
-                if (message.charAt(16) == 'I') {
-                    return Optional.of(session.getResponder()
-                                              .getAddressIp());
-                } else if (message.charAt(16) == 'R') {
-                    return Optional.of(session.getInitiator()
-                                              .getAddressIp());
-                }
+            if (datagram.getAddress()
+                        .equals(session.getInitiator()
+                                       .getAddressIp())) {
+                return Optional.of(session.getResponder()
+                                          .getAddressIp());
+            } else if (datagram.getAddress()
+                               .equals(session.getResponder()
+                                              .getAddressIp())) {
+                return Optional.of(session.getInitiator()
+                                          .getAddressIp());
             }
         }
 
