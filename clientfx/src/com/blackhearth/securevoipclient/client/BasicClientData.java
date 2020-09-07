@@ -16,4 +16,5 @@ public class BasicClientData {
     private PrivateKey privateKey;
     private PublicKey publicKey;
     private String AESKey;
+    private String companion;
 }

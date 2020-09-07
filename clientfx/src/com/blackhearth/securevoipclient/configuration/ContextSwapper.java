@@ -4,6 +4,7 @@ import com.blackhearth.securevoipclient.client.BasicClientData;
 import com.blackhearth.securevoipclient.client.connection.ConnectionService;
 import com.blackhearth.securevoipclient.client.user.VoIPUser;
 import com.blackhearth.securevoipclient.client.waitingroom.WaitingRoomService;
+import com.blackhearth.securevoipclient.rsa.Random128bit;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -18,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
 
 @Component
 @RequiredArgsConstructor
@@ -37,6 +40,8 @@ public class ContextSwapper {
     @Qualifier("callingUsers")
     private List<Pair<String, String>> callingUsers;
 
+    @Resource(name = "sendingData")
+    private BlockingQueue<byte[]> sendingData;
 
     @Autowired
     @Qualifier("waitingUsers")
@@ -73,6 +78,13 @@ public class ContextSwapper {
                         }
                         var response = connectionService.tryConnectWith(clientData.getUserToken(), button.getText());
                         if (response.getMessage().equals("OK")) {
+                            Random128bit random128bit = new Random128bit();
+                            String message = "ACCEPT" + random128bit.getResult();
+                            try {
+                                sendingData.put(message.getBytes());
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             swapToCallingActivity(button.getText());
                         }
                     });
@@ -93,6 +105,7 @@ public class ContextSwapper {
                     connectionService.refuseConnection(clientData.getUserToken(), pair.getValue());
                 }
             }
+            basicClientData.setCompanion(key);
             callingUsers.clear();
             scene.getChildren()
                  .clear();
@@ -101,6 +114,14 @@ public class ContextSwapper {
             Button disconnect = new Button();
             disconnect.setText("Disconnect");
             disconnect.setMinWidth(CLIENT_WIDTH);
+            disconnect.setOnMouseClicked(event -> {
+                try {
+                    sendingData.put("REJECT".getBytes());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                swapToWaitingRoom();
+            });
             scene.getChildren()
                  .add(text);
             scene.getChildren()

@@ -1,6 +1,8 @@
 package com.blackhearth.securevoipclient.client.network;
 
+import com.blackhearth.securevoipclient.client.BasicClientData;
 import com.blackhearth.securevoipclient.configuration.ContextSwapper;
+import com.blackhearth.securevoipclient.rsa.Random128bit;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -11,18 +13,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
 
 @Component
 @RequiredArgsConstructor
 public class DataInterpreter {
 
     private final ContextSwapper contextSwapper;
+    private final BasicClientData clientData;
+
+    @Resource(name = "sendingData")
+    private BlockingQueue<byte[]> sendingData;
 
     @Autowired
     @Qualifier("callingUsers")
     private List<Pair<String, String>> callingUsers;
-
 
     @Autowired
     @Qualifier("waitingUsers")
@@ -35,14 +42,13 @@ public class DataInterpreter {
         if ("NOTIFY".equals(message)) {
             contextSwapper.swapToWaitingRoom();
         } else if ("REJECT".equals(message)) {
-       //     rejectTheCall();
+            contextSwapper.swapToWaitingRoom();
         } else if (message.contains("CALLING")) {
             addCallingUser(message);
         } else if (message.contains("ACCEPT")) {
-           // swapToCallingContext(talker.getNick());
-           // tradeKeys(message.substring(6));
+            tradeKeys(message.substring(6));
         } else if (message.contains("AES")) {
-           // acceptKey(message);
+            acceptKey(message.substring(3));
         //} else if (speaker != null) {
             //sendToSpeaker(message);
         } else {
@@ -51,8 +57,22 @@ public class DataInterpreter {
         //return true;
     }
 
+    private void acceptKey(String message) {
+        clientData.setAESKey(clientData.getAESKey() + message);
+    }
+
+    private void tradeKeys(String key) {
+        String myKey = new Random128bit().getResult();
+        clientData.setAESKey(key + myKey);
+        try {
+            sendingData.put(("AES" + myKey).getBytes());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void addCallingUser(String message) {
-        message = message.substring(8);
+        message = message.substring(7);
         String[] data =message.split("\\|");
         callingUsers.add(new Pair<>(data[0], data[1]));
 
