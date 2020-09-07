@@ -45,11 +45,11 @@ public class BasicCommunicationForwarderService implements CommunicationForwarde
 
     @Override
     public void makeCall(String initiatorsToken,
-                         String respondersToken,
+                         String responderNick,
                          String requestId) {
 
         for (var user : users) {
-            if (user.getUserToken().equals(respondersToken)) {
+            if (user.getNick().contains(responderNick)) {
                 String callMessage = "CALLING" + getInitiatorNickFromToken(initiatorsToken) +
                         "|" +
                         requestId;
@@ -80,8 +80,10 @@ public class BasicCommunicationForwarderService implements CommunicationForwarde
         return "";
     }
 
+    private int PORT = 12345;
+
     private void sendMessageToUser(byte[] message, VoIPUser user) {
-        DatagramPacket packet = new DatagramPacket(message, message.length, user.getAddressIp(), 1337);
+        DatagramPacket packet = new DatagramPacket(message, message.length, user.getAddressIp(), PORT);
         try {
             socket.send(packet);
         } catch (IOException e) {
@@ -90,12 +92,13 @@ public class BasicCommunicationForwarderService implements CommunicationForwarde
         }
     }
 
-    private void sendMessageToAllUsers(byte[] message) {
+    private void sendMessageToAllUsers(byte[] message, VoIPUser userExcluded) {
         for (var user : users) {
-            if (user.isReadyToTalk()) {
-                DatagramPacket packet = new DatagramPacket(message, message.length, user.getAddressIp(), 1337);
+            if (user.isReadyToTalk() && user != userExcluded) {
+                DatagramPacket packet = new DatagramPacket(message, message.length, user.getAddressIp(), PORT);
                 try {
-                    socket.send(packet);
+                    socket.
+                                  send(packet);
                 } catch (IOException e) {
                     log.error(e.toString() + "\ncause: " + e.getCause()
                                                             .toString());
@@ -110,7 +113,7 @@ public class BasicCommunicationForwarderService implements CommunicationForwarde
             if (user.getUserToken().equals(datagramData)) {
                 user.setAddressIp(datagram.getAddress());
                 user.setReadyToTalk(true);
-                sendMessageToAllUsers("NOTIFY".getBytes());
+                sendMessageToAllUsers("NOTIFY".getBytes(), user);
                 return true;
             }
         }
@@ -118,7 +121,7 @@ public class BasicCommunicationForwarderService implements CommunicationForwarde
     }
 
     private void forwardDatagram(InetAddress address) {
-        DatagramPacket packet = new DatagramPacket(message, message.length, address, 1337);
+        DatagramPacket packet = new DatagramPacket(message, message.length, address, 12345);
         try {
             socket.send(packet);
         } catch (IOException e) {

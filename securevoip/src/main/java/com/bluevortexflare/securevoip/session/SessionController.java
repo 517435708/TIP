@@ -3,12 +3,10 @@ package com.bluevortexflare.securevoip.session;
 import com.bluevortexflare.securevoip.users.connection.UserConnectionService;
 import com.bluevortexflare.securevoip.users.connection.dto.ConnectionResponse;
 import com.bluevortexflare.securevoip.session.UserSessionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/api/session")
+@RestController
+@RequestMapping("/api/session")
 public class SessionController {
 
     private UserConnectionService connectionService;
