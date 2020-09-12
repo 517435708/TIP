@@ -1,12 +1,4 @@
 package com.blackhearth.securevoipclient.cryptographic;
-import com.blackhearth.securevoipclient.ApplicationConstants;
-import javafx.scene.media.AudioTrack;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -14,67 +6,75 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.sound.sampled.*;
-import javax.xml.transform.Source;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
-public class BasicMicRegister implements MicRegister {
-    private static final int SAMPLE_RATE = 8000; // Hertz
-    private static final int SAMPLE_INTERVAL = 20; // Milliseconds
-    private static final int SAMPLE_SIZE = 2; // Bytes
-    private static final int BUF_SIZE = SAMPLE_INTERVAL * SAMPLE_INTERVAL * SAMPLE_SIZE * 2; //Bytes
-    private float sampleRate = 16000.0F;
-    private int sampleInbits = 16;
-    private int channels = 1;
-    private boolean signed = true;
-    private boolean bigEndian = false;
-    private final String key = "something";
-    private byte[] encryptKey = key.getBytes();
-    private Cipher cipher = Cipher.getInstance("AES");
-    private SecretKeySpec secretKeySpec = new SecretKeySpec(encryptKey, "AES");
-    ByteArrayOutputStream byteOutputStream;
+public class BasicMicRegister extends AudioConstants implements MicRegister {
+
+    private Cipher encrypt;
+    private Cipher decrypt;
+    private TargetDataLine microphone;
+    private SourceDataLine speakers;
     private AudioFormat audioFormat;
-    private TargetDataLine targetDataLine;
-    AudioInputStream inputStream;
-    private SourceDataLine sourceDataLine;
 
-    public BasicMicRegister() throws NoSuchPaddingException, NoSuchAlgorithmException {
+    public BasicMicRegister(String key) {
+
+//        this.microphone = microphone;
+//        this.speakers = speakers;
+
+        try {
+            this.encrypt = Cipher.getInstance("AES");
+            this.decrypt = Cipher.getInstance("AES");
+            SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), "AES");
+            this.audioFormat = new AudioFormat(sampleRate, sampleInbits, channels, signed, bigEndian);
+            encrypt.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+            decrypt.init(Cipher.DECRYPT_MODE, secretKeySpec);
+            DataLine.Info sendData = new DataLine.Info(TargetDataLine.class, audioFormat);
+            DataLine.Info receiveData = new DataLine.Info(SourceDataLine.class, audioFormat);
+            this.microphone = (TargetDataLine) AudioSystem.getLine(sendData);
+            this.speakers = (SourceDataLine) AudioSystem.getLine(receiveData);
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | LineUnavailableException e) {
+            System.out.println("Something went wrong");
+        }
     }
 
+
     @Override
-    public byte[] sendVoiceMessage() throws
-                                     InvalidKeyException,
-                                     BadPaddingException,
-                                     IllegalBlockSizeException,
-                                     LineUnavailableException {
-        cipher.init(Cipher.ENCRYPT_MODE,secretKeySpec);
-        int bytes_read;
+    public byte[] sendVoiceMessage() {
+        int bytesRead;
         byte[] buf = new byte[BUF_SIZE];
-        audioFormat = new AudioFormat(sampleRate,sampleInbits,channels,signed,bigEndian);
-        DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class,audioFormat);
-        targetDataLine.open(audioFormat);
-        targetDataLine.start();
-        bytes_read = targetDataLine.read(buf,0,BUF_SIZE);
-        byte[] encryptedData = new byte[bytes_read];
-        encryptedData = cipher.doFinal(buf);
-        targetDataLine.stop();
-        targetDataLine.flush();
-        targetDataLine.close();
-        return encryptedData;
+        byte[] encryptedData;
+        try {
+            //microphone = (TargetDataLine) AudioSystem.getLine(sendData);
+            microphone.open(audioFormat);
+            microphone.start();
+            bytesRead = microphone.read(buf, 0, BUF_SIZE);
+            byte[] data = new byte[bytesRead];
+            encryptedData = encrypt.doFinal(data);
+            microphone.stop();
+            microphone.flush();
+            microphone.close();
+            return encryptedData;
+        } catch (LineUnavailableException | IllegalBlockSizeException | BadPaddingException e) {
+            return new byte[0];
+        }
     }
 
+
     @Override
-    public void receiveMessage(byte[] encryptedVoice) throws
-                                                      InvalidKeyException,
-                                                      BadPaddingException,
-                                                      IllegalBlockSizeException,
-                                                      LineUnavailableException {
-        byte[] decryptedVoice;
-        AudioFormat audioFormat =  new AudioFormat(sampleRate,sampleInbits,channels,signed,bigEndian);
-        sourceDataLine.start();
-        cipher.init(Cipher.DECRYPT_MODE,secretKeySpec);
-        decryptedVoice = cipher.doFinal(encryptedVoice);
-        sourceDataLine.write(decryptedVoice,0,BUF_SIZE);
-        sourceDataLine.stop();
-        sourceDataLine.flush();
-        sourceDataLine.close();
+    public void receiveMessage(byte[] encryptedVoice) {
+        try {
+            byte[] decryptedVoice = decrypt.doFinal(encryptedVoice);
+            //DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, audioFormat);
+            //speakers = (SourceDataLine) AudioSystem.getLine(receiveData);
+            speakers.open(audioFormat);
+            speakers.start();
+            speakers.write(decryptedVoice, 0, BUF_SIZE);
+            speakers.stop();
+            speakers.flush();
+            speakers.close();
+        } catch (LineUnavailableException | IllegalBlockSizeException | BadPaddingException e) {
+            System.out.println("Something went wrong");
+        }
     }
 }
