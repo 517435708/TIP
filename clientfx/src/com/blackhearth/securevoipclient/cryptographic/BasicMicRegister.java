@@ -49,8 +49,8 @@ public class BasicMicRegister implements MicRegister {
     private String generateKey(String key) {
 
         StringBuilder myKey = new StringBuilder();
-        for (int i = 0; i < 128; i++) {
-            myKey.append(key.charAt(i % key.length()));
+        for (int i = 0; i < 32; i++) {
+            myKey.append(key.charAt(i*3 % key.length()));
         }
         return myKey.toString();
     }
