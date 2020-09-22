@@ -1,36 +1,32 @@
 package com.blackhearth.securevoipclient.cryptographic;
 
-import org.springframework.stereotype.Component;
-
-import javax.crypto.*;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.sound.sampled.*;
-import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 
 import static com.blackhearth.securevoipclient.cryptographic.AudioConstants.*;
 
-public class BasicMicRegister  implements MicRegister {
+public class BasicMicRegister implements MicRegister {
 
+    private static String salt = "ssshhhhhhhhhhh!!!!";
+    private final String ALGORITHM = "AES";
     private Cipher encrypt;
     private Cipher decrypt;
     private TargetDataLine microphone;
     private SourceDataLine speakers;
     private AudioFormat audioFormat;
 
-
-    private static String salt = "ssshhhhhhhhhhh!!!!";
-    private final String ALGORITHM = "AES";
-
     public BasicMicRegister(String key) {
 
 //        this.microphone = microphone;
 //        this.speakers = speakers;
+
+        key = generateKey(key);
 
         try {
             this.encrypt = Cipher.getInstance(ALGORITHM);
@@ -48,6 +44,15 @@ public class BasicMicRegister  implements MicRegister {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private String generateKey(String key) {
+
+        StringBuilder myKey = new StringBuilder();
+        for (int i = 0; i < 128; i++) {
+            myKey.append(key.charAt(i % key.length()));
+        }
+        return myKey.toString();
     }
 
 
