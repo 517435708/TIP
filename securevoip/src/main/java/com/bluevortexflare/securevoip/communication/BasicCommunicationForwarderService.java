@@ -27,7 +27,7 @@ public class BasicCommunicationForwarderService implements CommunicationForwarde
     @Resource(name = "waitingRoom")
     private List<VoIPUser> users;
 
-    private byte[] message = new byte[1024];
+    private byte[] message = new byte[1616];
 
     @Override
     public void run() {

@@ -32,8 +32,6 @@ public class ClientSender {
             boolean run = true;
             while (run) {
                 while (!sendingData.isEmpty() && run) {
-                    System.out.println("Trying to send sendingData!");
-                    System.out.println(new String(sendingData.peek()));
                     try (DatagramSocket udpSocket = new DatagramSocket(SENDER_CLIENT_PORT)) {
                         InetAddress serverAddress = InetAddress.getByName(APPLICATION_HOST);
                         byte[] message = sendingData.poll();

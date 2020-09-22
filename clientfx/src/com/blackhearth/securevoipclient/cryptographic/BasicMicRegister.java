@@ -74,6 +74,8 @@ public class BasicMicRegister  implements MicRegister {
             microphone.close();
             return encryptedData;
         } catch (LineUnavailableException | IllegalBlockSizeException | BadPaddingException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
             return new byte[0];
         }
     }
@@ -92,7 +94,7 @@ public class BasicMicRegister  implements MicRegister {
             speakers.flush();
             speakers.close();
         } catch (LineUnavailableException | IllegalBlockSizeException | BadPaddingException e) {
-            System.out.println("Something went wrong");
+            e.printStackTrace();
         }
     }
 }
