@@ -2,14 +2,15 @@ package com.blackhearth.securevoipclient.cryptographic;
 
 import org.springframework.stereotype.Component;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import javax.crypto.*;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.sound.sampled.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 
 import static com.blackhearth.securevoipclient.cryptographic.AudioConstants.*;
 
@@ -21,24 +22,33 @@ public class BasicMicRegister  implements MicRegister {
     private SourceDataLine speakers;
     private AudioFormat audioFormat;
 
+
+    private static String salt = "ssshhhhhhhhhhh!!!!";
+    private final String ALGORITHM = "AES/CBC/PKCS5Padding";
+
     public BasicMicRegister(String key) {
 
 //        this.microphone = microphone;
 //        this.speakers = speakers;
 
         try {
-            this.encrypt = Cipher.getInstance("AES");
-            this.decrypt = Cipher.getInstance("AES");
-            SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), "AES");
+            this.encrypt = Cipher.getInstance(ALGORITHM);
+            this.decrypt = Cipher.getInstance(ALGORITHM);
+
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+            KeySpec spec = new PBEKeySpec(key.toCharArray(), salt.getBytes(), 65536, 256);
+            SecretKey tmp = factory.generateSecret(spec);
+            SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES");
             this.audioFormat = new AudioFormat(SAMPLE_RATE, SAMPLE_INBITS, CHANNELS, SIGNED, BIG_ENDIAN);
-            encrypt.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-            decrypt.init(Cipher.DECRYPT_MODE, secretKeySpec);
+            encrypt.init(Cipher.ENCRYPT_MODE, secretKey);
+            decrypt.init(Cipher.DECRYPT_MODE, secretKey);
             DataLine.Info sendData = new DataLine.Info(TargetDataLine.class, audioFormat);
             DataLine.Info receiveData = new DataLine.Info(SourceDataLine.class, audioFormat);
             this.microphone = (TargetDataLine) AudioSystem.getLine(sendData);
             this.speakers = (SourceDataLine) AudioSystem.getLine(receiveData);
-        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | LineUnavailableException e) {
-            System.out.println("Something went wrong");
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | LineUnavailableException | InvalidKeySpecException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
