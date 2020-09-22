@@ -1,5 +1,7 @@
 package com.blackhearth.securevoipclient.cryptographic;
 
+import org.springframework.stereotype.Component;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -9,7 +11,9 @@ import javax.sound.sampled.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-public class BasicMicRegister extends AudioConstants implements MicRegister {
+import static com.blackhearth.securevoipclient.cryptographic.AudioConstants.*;
+
+public class BasicMicRegister  implements MicRegister {
 
     private Cipher encrypt;
     private Cipher decrypt;
@@ -26,7 +30,7 @@ public class BasicMicRegister extends AudioConstants implements MicRegister {
             this.encrypt = Cipher.getInstance("AES");
             this.decrypt = Cipher.getInstance("AES");
             SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), "AES");
-            this.audioFormat = new AudioFormat(sampleRate, sampleInbits, channels, signed, bigEndian);
+            this.audioFormat = new AudioFormat(SAMPLE_RATE, SAMPLE_INBITS, CHANNELS, SIGNED, BIG_ENDIAN);
             encrypt.init(Cipher.ENCRYPT_MODE, secretKeySpec);
             decrypt.init(Cipher.DECRYPT_MODE, secretKeySpec);
             DataLine.Info sendData = new DataLine.Info(TargetDataLine.class, audioFormat);

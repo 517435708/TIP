@@ -2,6 +2,8 @@ package com.blackhearth.securevoipclient.client.network;
 
 import com.blackhearth.securevoipclient.client.BasicClientData;
 import com.blackhearth.securevoipclient.configuration.ContextSwapper;
+import com.blackhearth.securevoipclient.cryptographic.BasicMicRegister;
+import com.blackhearth.securevoipclient.cryptographic.MicRegister;
 import com.blackhearth.securevoipclient.rsa.Random128bit;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
@@ -23,6 +25,9 @@ public class DataInterpreter {
 
     private final ContextSwapper contextSwapper;
     private final BasicClientData clientData;
+    private MicRegister micRegister;
+
+    private Thread chatThread;
 
     @Resource(name = "sendingData")
     private BlockingQueue<byte[]> sendingData;
@@ -39,26 +44,40 @@ public class DataInterpreter {
         String message = new String(data);
         message = message.trim();
         // Najbardziej gówniany kod jaki w życiu napisałem. Kill me....
-        if ("NOTIFY".equals(message)) {
+        if ("REJECT".equals(message)) {
+            micRegister = null;
             contextSwapper.swapToWaitingRoom();
-        } else if ("REJECT".equals(message)) {
-            contextSwapper.swapToWaitingRoom();
-        } else if (message.contains("CALLING")) {
-            addCallingUser(message);
-        } else if (message.contains("ACCEPT")) {
-            tradeKeys(message.substring(6));
-        } else if (message.contains("AES")) {
-            acceptKey(message.substring(3));
-        //} else if (speaker != null) {
-            //sendToSpeaker(message);
+        } else if (micRegister == null) {
+            if ("NOTIFY".equals(message)) {
+                contextSwapper.swapToWaitingRoom();
+            } else if (message.contains("CALLING")) {
+                addCallingUser(message);
+            } else if (message.contains("ACCEPT")) {
+                tradeKeys(message.substring(6));
+            } else if (message.contains("AES")) {
+                acceptKey(message.substring(3));
+            }
         } else {
-           // return false;
+            micRegister.receiveMessage(data);
         }
-        //return true;
     }
 
     private void acceptKey(String message) {
         clientData.setAESKey(clientData.getAESKey() + message);
+        beginChat();
+    }
+
+    private void beginChat() {
+        micRegister = new BasicMicRegister(clientData.getAESKey());
+        chatThread = new Thread(() -> {
+            while (micRegister != null) {
+                try {
+                    sendingData.put(micRegister.sendVoiceMessage());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void tradeKeys(String key) {
@@ -66,6 +85,7 @@ public class DataInterpreter {
         clientData.setAESKey(key + myKey);
         try {
             sendingData.put(("AES" + myKey).getBytes());
+            beginChat();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -73,11 +93,12 @@ public class DataInterpreter {
 
     private void addCallingUser(String message) {
         message = message.substring(7);
-        String[] data =message.split("\\|");
+        String[] data = message.split("\\|");
         callingUsers.add(new Pair<>(data[0], data[1]));
 
         for (var user : waitingUsers) {
-            if (user.getText().equals(data[0])) {
+            if (user.getText()
+                    .equals(data[0])) {
                 user.setBackground(new Background(new BackgroundFill(Paint.valueOf("#00FF00"), null, null)));
             }
         }
