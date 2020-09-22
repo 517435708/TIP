@@ -11,10 +11,7 @@ public class Random128bit {
     private Random random = new Random();
 
     public Random128bit() {
-        for (int i = 0; i < 16; i++) {
-            int myRandomNumber = random.nextInt(0x10) + 0x10;
-            result += Integer.toHexString(myRandomNumber);
-        }
+        random.ints(16, 33, 126).forEach(c -> result += Character.toString(c));
     }
 
 }

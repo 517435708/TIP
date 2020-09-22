@@ -55,6 +55,7 @@ public class ClientSender {
                                                        message.length,
                                                        serverAddress,
                                                        APPLICATION_PORT);
+            System.out.println("SENDING: " + new String(message));
             udpSocket.send(packet);
         }
     }

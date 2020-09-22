@@ -45,6 +45,7 @@ public class DataInterpreter {
         message = message.trim();
         // Najbardziej gówniany kod jaki w życiu napisałem. Kill me....
         if ("REJECT".equals(message)) {
+            micRegister.flush();
             micRegister = null;
             contextSwapper.swapToWaitingRoom();
         } else if (micRegister == null) {

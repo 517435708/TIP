@@ -12,6 +12,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,7 @@ public class BasicCommunicationForwarderService implements CommunicationForwarde
     public void run() {
         new Thread(() -> {
             while (true) {
+                Arrays.fill(message, (byte)0);
                 DatagramPacket datagram = receiveDatagram();
                 if (!setUserInetAddressIfTokenReceived(datagram)) {
                     Optional<InetAddress> address = sessionService.getOppositeAddressFromSession(datagram);
