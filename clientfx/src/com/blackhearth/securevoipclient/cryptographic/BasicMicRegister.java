@@ -7,6 +7,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.sound.sampled.*;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -32,6 +33,9 @@ public class BasicMicRegister  implements MicRegister {
 //        this.speakers = speakers;
 
         try {
+            byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            IvParameterSpec ivspec = new IvParameterSpec(iv);
+
             this.encrypt = Cipher.getInstance(ALGORITHM);
             this.decrypt = Cipher.getInstance(ALGORITHM);
 
@@ -40,13 +44,13 @@ public class BasicMicRegister  implements MicRegister {
             SecretKey tmp = factory.generateSecret(spec);
             SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES");
             this.audioFormat = new AudioFormat(SAMPLE_RATE, SAMPLE_INBITS, CHANNELS, SIGNED, BIG_ENDIAN);
-            encrypt.init(Cipher.ENCRYPT_MODE, secretKey);
-            decrypt.init(Cipher.DECRYPT_MODE, secretKey);
+            encrypt.init(Cipher.ENCRYPT_MODE, secretKey, ivspec);
+            decrypt.init(Cipher.DECRYPT_MODE, secretKey, ivspec);
             DataLine.Info sendData = new DataLine.Info(TargetDataLine.class, audioFormat);
             DataLine.Info receiveData = new DataLine.Info(SourceDataLine.class, audioFormat);
             this.microphone = (TargetDataLine) AudioSystem.getLine(sendData);
             this.speakers = (SourceDataLine) AudioSystem.getLine(receiveData);
-        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | LineUnavailableException | InvalidKeySpecException e) {
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | LineUnavailableException | InvalidKeySpecException | InvalidAlgorithmParameterException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
