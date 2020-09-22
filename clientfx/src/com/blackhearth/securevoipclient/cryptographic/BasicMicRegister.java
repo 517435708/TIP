@@ -56,7 +56,6 @@ public class BasicMicRegister implements MicRegister {
 
     @Override
     public byte[] sendVoiceMessage() {
-        int bytesRead;
         byte[] buf = new byte[BUF_SIZE];
         try {
             microphone.read(buf, 0, BUF_SIZE);

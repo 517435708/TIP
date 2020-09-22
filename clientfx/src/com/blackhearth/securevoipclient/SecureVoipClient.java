@@ -1,8 +1,6 @@
 package com.blackhearth.securevoipclient;
 
 
-import com.blackhearth.securevoipclient.cryptographic.BasicMicRegister;
-import com.blackhearth.securevoipclient.rsa.Random128bit;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -17,6 +15,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class SecureVoipClient extends Application {
 
     private static ApplicationContext context;
+
 
     public static void main(String[] args) {
         context = new SpringApplicationBuilder(SecureVoipClient.class)
