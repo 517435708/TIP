@@ -78,6 +78,7 @@ public class DataInterpreter {
                 }
             }
         });
+        chatThread.start();
     }
 
     private void tradeKeys(String key) {
