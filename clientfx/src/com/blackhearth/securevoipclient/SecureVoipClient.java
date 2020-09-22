@@ -19,17 +19,9 @@ public class SecureVoipClient extends Application {
     private static ApplicationContext context;
 
     public static void main(String[] args) {
-
-        BasicMicRegister basicMicRegister = new BasicMicRegister("5891hgifuyg13wf8g328fg3");
-
-        while (true) {
-            basicMicRegister.receiveMessage(basicMicRegister.sendVoiceMessage());
-        }
-
-/*
         context = new SpringApplicationBuilder(SecureVoipClient.class)
                 .web(WebApplicationType.NONE).run(args);
-        launch(args);*/
+        launch(args);
     }
 
     @Override
