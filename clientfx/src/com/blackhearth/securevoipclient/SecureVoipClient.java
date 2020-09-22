@@ -1,6 +1,7 @@
 package com.blackhearth.securevoipclient;
 
 
+import com.blackhearth.securevoipclient.cryptographic.BasicMicRegister;
 import com.blackhearth.securevoipclient.rsa.Random128bit;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -18,9 +19,17 @@ public class SecureVoipClient extends Application {
     private static ApplicationContext context;
 
     public static void main(String[] args) {
+
+        BasicMicRegister basicMicRegister = new BasicMicRegister("5891hgifuyg13wf8g328fg3");
+
+        while (true) {
+            basicMicRegister.receiveMessage(basicMicRegister.sendVoiceMessage());
+        }
+
+/*
         context = new SpringApplicationBuilder(SecureVoipClient.class)
                 .web(WebApplicationType.NONE).run(args);
-        launch(args);
+        launch(args);*/
     }
 
     @Override

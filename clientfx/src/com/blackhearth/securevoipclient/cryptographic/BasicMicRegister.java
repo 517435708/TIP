@@ -59,9 +59,8 @@ public class BasicMicRegister implements MicRegister {
         int bytesRead;
         byte[] buf = new byte[BUF_SIZE];
         try {
-            bytesRead = microphone.read(buf, 0, BUF_SIZE);
-            byte[] data = new byte[bytesRead];
-            return encrypt.doFinal(data);
+            microphone.read(buf, 0, BUF_SIZE);
+            return encrypt.doFinal(buf);
         } catch (IllegalBlockSizeException | BadPaddingException e) {
             microphone.stop();
             microphone.flush();
