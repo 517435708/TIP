@@ -33,6 +33,7 @@ public class ClientListen {
                     byte[] message = new byte[MAX_MESSAGE_RECEIVED];
                     DatagramPacket packet = new DatagramPacket(message, message.length);
                     udpSocket.receive(packet);
+                    System.out.println("RECEIVED: " + new String(packet.getData()));
                     dataInterpreter.proceed(packet.getData());
                 } catch (IOException e) {
                     run = false;

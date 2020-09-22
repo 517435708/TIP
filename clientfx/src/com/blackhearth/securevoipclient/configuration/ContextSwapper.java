@@ -71,6 +71,14 @@ public class ContextSwapper {
                         for (var pair : callingUsers) {
                             if (pair.getKey()
                                     .equals(button.getText())) {
+                                String myKey = new Random128bit().getResult();
+                                String message = "ACCEPT" + myKey;
+                                try {
+                                    sendingData.put(message.getBytes());
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                clientData.setAESKey(myKey);
                                 connectionService.acceptConnection(clientData.getUserToken(), pair.getValue());
                                 swapToCallingActivity(pair.getKey());
                                 return;
@@ -78,13 +86,6 @@ public class ContextSwapper {
                         }
                         var response = connectionService.tryConnectWith(clientData.getUserToken(), button.getText());
                         if (response.getMessage().equals("OK")) {
-                            Random128bit random128bit = new Random128bit();
-                            String message = "ACCEPT" + random128bit.getResult();
-                            try {
-                                sendingData.put(message.getBytes());
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
                             swapToCallingActivity(button.getText());
                         }
                     });
