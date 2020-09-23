@@ -1,8 +1,8 @@
-\justy{System oparty jest o architekturę klient - serwer. Aplikacja kliencka zainstalowana została na urządzeniu mobilnym. Jej zadaniem jest udostępnienie interfejsu dla użytkownika w taki sposób, aby umożliwić sprawne i łatwe korzystanie z usług serwera. Aplikacja zapewnia również poziom bezpieczeństwa szyfrując/deszyfrując aplikację (serwer pełni rolę pośrednika, nie uczestniczy w komunikacji, nie jest w stanie "podsłuchać" rozmowy, gdyż ta jest szyfrowana.) W architekturze definiujemy 3 byty uczestniczące w procesie komunikacji:}
+\justy{System oparty jest o architekturę klient - serwer. Aplikacja kliencka jest desktopowa. Jej zadaniem jest udostępnienie interfejsu dla użytkownika w taki sposób, aby umożliwić sprawne i łatwe korzystanie z usług serwera. Aplikacja zapewnia również poziom bezpieczeństwa szyfrując/deszyfrując aplikację (serwer pełni rolę pośrednika, nie uczestniczy w komunikacji, nie jest w stanie "podsłuchać" rozmowy, gdyż ta jest szyfrowana.) W architekturze definiujemy 3 byty uczestniczące w procesie komunikacji:}
 
 \begin{itemize}
 	\item \textit{Serwer} - aplikacja napisana w języku Java z użyciem frameworka Spring Boot. Jest instalowana na urządzeniu z wystarczającymi zasobami do zarządzania komunikacją (np. laptop, przy założeniu, że ilość żądań będzie nieznaczna),
-	\item \textit{Klient} - aplikacja na urządzenia mobilne z systemem Android,
+	\item \textit{Klient} - aplikacja kliencka wykorzystująca JavaFX,
 	\item \textit{Użytkownik} -\justy{osoba posiadająca zainstalowaną aplikację wraz z }wylosowanym (przez serwer) unikalnym id,
 	\item \textit{Osoba akceptująca połączenie} - \justy{jest to użytkownik, który otrzymał informację poprzez interfejs, że inny użytkownik chce się z nim połączyć.}
 \end{itemize}

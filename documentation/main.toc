@@ -12,3 +12,14 @@
 \contentsline {section}{\numberline {7}Implementacja serwera}{12}%
 \contentsline {subsection}{\numberline {7.1}RegisterService}{12}%
 \contentsline {subsection}{\numberline {7.2}ConnectionService}{12}%
+\contentsline {section}{\numberline {8}Implementacja klienta}{13}%
+\contentsline {subsection}{\numberline {8.1}AudioConstants}{13}%
+\contentsline {subsection}{\numberline {8.2}BasicMicRegister}{14}%
+\contentsline {subsection}{\numberline {8.3}sendVoiceMessage}{15}%
+\contentsline {subsection}{\numberline {8.4}receiveMessage}{15}%
+\contentsline {section}{\numberline {9}Podsumowanie}{16}%
+\contentsline {section}{\numberline {10}Podział prac}{16}%
+\contentsline {subsection}{\numberline {10.1}Cele zrealizowane}{16}%
+\contentsline {subsection}{\numberline {10.2}Cele niezrealizowane}{17}%
+\contentsline {subsection}{\numberline {10.3}Napotkane problemy}{17}%
+\contentsline {subsection}{\numberline {10.4}Perspektywa rozwoju}{17}%
