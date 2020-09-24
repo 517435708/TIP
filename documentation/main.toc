@@ -5,21 +5,28 @@
 \contentsline {subsection}{\numberline {3.1}Funkcjonalne}{3}%
 \contentsline {subsection}{\numberline {3.2}Niefunkcjonalne}{3}%
 \contentsline {section}{\numberline {4}Technologie, narzędzia, środowisko, biblioteki, kodeki}{4}%
-\contentsline {section}{\numberline {5}Ekrany}{4}%
-\contentsline {section}{\numberline {6}Diagramy UML}{9}%
-\contentsline {subsection}{\numberline {6.1}Diagram przypadków użycia}{10}%
-\contentsline {subsection}{\numberline {6.2}Uproszczony diagram przepływu}{10}%
-\contentsline {section}{\numberline {7}Implementacja serwera}{12}%
-\contentsline {subsection}{\numberline {7.1}RegisterService}{12}%
-\contentsline {subsection}{\numberline {7.2}ConnectionService}{12}%
-\contentsline {section}{\numberline {8}Implementacja klienta}{13}%
-\contentsline {subsection}{\numberline {8.1}AudioConstants}{13}%
-\contentsline {subsection}{\numberline {8.2}BasicMicRegister}{14}%
-\contentsline {subsection}{\numberline {8.3}sendVoiceMessage}{15}%
-\contentsline {subsection}{\numberline {8.4}receiveMessage}{15}%
-\contentsline {section}{\numberline {9}Podsumowanie}{16}%
-\contentsline {section}{\numberline {10}Podział prac}{16}%
-\contentsline {subsection}{\numberline {10.1}Cele zrealizowane}{16}%
-\contentsline {subsection}{\numberline {10.2}Cele niezrealizowane}{17}%
-\contentsline {subsection}{\numberline {10.3}Napotkane problemy}{17}%
-\contentsline {subsection}{\numberline {10.4}Perspektywa rozwoju}{17}%
+\contentsline {section}{\numberline {5}Opis najważniejszych protokołów}{4}%
+\contentsline {subsection}{\numberline {5.1}Dołączanie użytkownika do poczekalni}{4}%
+\contentsline {subsection}{\numberline {5.2}Łączenie użytkowników oraz negocjacje klucza}{5}%
+\contentsline {section}{\numberline {6}Ekrany}{5}%
+\contentsline {section}{\numberline {7}Diagramy UML}{10}%
+\contentsline {subsection}{\numberline {7.1}Diagram przypadków użycia}{11}%
+\contentsline {subsection}{\numberline {7.2}Uproszczony diagram przepływu}{11}%
+\contentsline {subsection}{\numberline {7.3}Diagramy stanów}{13}%
+\contentsline {subsection}{\numberline {7.4}Diagram klas}{15}%
+\contentsline {section}{\numberline {8}Implementacja serwera}{15}%
+\contentsline {subsection}{\numberline {8.1}RegisterService}{15}%
+\contentsline {subsection}{\numberline {8.2}ConnectionService}{15}%
+\contentsline {section}{\numberline {9}Implementacja klienta}{16}%
+\contentsline {subsection}{\numberline {9.1}AudioConstants}{16}%
+\contentsline {subsection}{\numberline {9.2}BasicMicRegister}{17}%
+\contentsline {subsection}{\numberline {9.3}sendVoiceMessage}{18}%
+\contentsline {subsection}{\numberline {9.4}receiveMessage}{18}%
+\contentsline {section}{\numberline {10}Testy i przebieg sesji}{19}%
+\contentsline {section}{\numberline {11}Analiza bezpieczeństwa}{19}%
+\contentsline {section}{\numberline {12}Podsumowanie}{19}%
+\contentsline {section}{\numberline {13}Podział prac}{19}%
+\contentsline {subsection}{\numberline {13.1}Cele zrealizowane}{20}%
+\contentsline {subsection}{\numberline {13.2}Cele niezrealizowane}{20}%
+\contentsline {subsection}{\numberline {13.3}Napotkane problemy}{20}%
+\contentsline {subsection}{\numberline {13.4}Perspektywa rozwoju}{20}%
