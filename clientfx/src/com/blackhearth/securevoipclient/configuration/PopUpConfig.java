@@ -1,6 +1,7 @@
 package com.blackhearth.securevoipclient.configuration;
 
 import com.blackhearth.securevoipclient.client.BasicClientData;
+import com.blackhearth.securevoipclient.client.network.ClientSender;
 import com.blackhearth.securevoipclient.client.register.RegisterService;
 import com.blackhearth.securevoipclient.client.register.dto.RegisterRequest;
 import com.blackhearth.securevoipclient.rsa.BasicConverter;
@@ -17,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import java.util.concurrent.BlockingQueue;
 
 @Configuration
 @RequiredArgsConstructor
@@ -34,9 +33,8 @@ public class PopUpConfig {
     private final BasicClientData basicClientData;
     private final ContextSwapper contextSwapper;
     private final VBox scene;
+    private final ClientSender sending;
 
-    @Resource(name = "sendingData")
-    public BlockingQueue<byte[]> sending;
 
     @PostConstruct
     public void popup() {
@@ -62,7 +60,7 @@ public class PopUpConfig {
                 var response = registerService.registerUser(registerRequest);
                 basicClientData.setNickName(response.getNick());
                 basicClientData.setUserToken(response.getUserToken());
-                sending.add(response.getUserToken()
+                sending.put(response.getUserToken()
                                     .getBytes());
                 contextSwapper.swapToWaitingRoom();
                 dialog.close();

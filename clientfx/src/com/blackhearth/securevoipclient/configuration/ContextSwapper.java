@@ -2,11 +2,11 @@ package com.blackhearth.securevoipclient.configuration;
 
 import com.blackhearth.securevoipclient.client.BasicClientData;
 import com.blackhearth.securevoipclient.client.connection.ConnectionService;
+import com.blackhearth.securevoipclient.client.network.ClientSender;
 import com.blackhearth.securevoipclient.client.user.VoIPUser;
 import com.blackhearth.securevoipclient.client.waitingroom.WaitingRoomService;
 import com.blackhearth.securevoipclient.rsa.Random128bit;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -19,9 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
 
 @Component
 @RequiredArgsConstructor
@@ -36,12 +34,11 @@ public class ContextSwapper {
     private final BasicClientData clientData;
     private final VBox scene;
 
+    private final ClientSender clientSender;
+
     @Autowired
     @Qualifier("callingUsers")
     private List<Pair<String, String>> callingUsers;
-
-    @Resource(name = "sendingData")
-    private BlockingQueue<byte[]> sendingData;
 
     @Autowired
     @Qualifier("waitingUsers")
@@ -75,11 +72,7 @@ public class ContextSwapper {
                                 if (response.getMessage().equals("OK")) {
                                     String myKey = new Random128bit().getResult();
                                     String message = "ACCEPT" + myKey;
-                                    try {
-                                        sendingData.put(message.getBytes());
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
+                                    clientSender.put(message.getBytes());
                                     clientData.setAESKey(myKey);
                                     swapToCallingActivity(pair.getKey());
                                 }
@@ -118,11 +111,7 @@ public class ContextSwapper {
             disconnect.setText("Disconnect");
             disconnect.setMinWidth(CLIENT_WIDTH);
             disconnect.setOnMouseClicked(event -> {
-                try {
-                    sendingData.put("REJECT".getBytes());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                clientSender.put("REJECT".getBytes());
                 swapToWaitingRoom();
             });
             scene.getChildren()

@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
 
 @Component
 @RequiredArgsConstructor
@@ -25,12 +23,10 @@ public class DataInterpreter {
 
     private final ContextSwapper contextSwapper;
     private final BasicClientData clientData;
+    private final ClientSender clientSender;
+
     private MicRegister micRegister;
-
     private Thread chatThread;
-
-    @Resource(name = "sendingData")
-    private BlockingQueue<byte[]> sendingData;
 
     @Autowired
     @Qualifier("callingUsers")
@@ -72,11 +68,7 @@ public class DataInterpreter {
         micRegister = new BasicMicRegister(clientData.getAESKey());
         chatThread = new Thread(() -> {
             while (micRegister != null) {
-                try {
-                    sendingData.put(micRegister.sendVoiceMessage());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                clientSender.put(micRegister.sendVoiceMessage());
             }
         });
         chatThread.start();
@@ -85,12 +77,8 @@ public class DataInterpreter {
     private void tradeKeys(String key) {
         String myKey = new Random128bit().getResult();
         clientData.setAESKey(key + myKey);
-        try {
-            sendingData.put(("AES" + myKey).getBytes());
-            beginChat();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        clientSender.put(("AES" + myKey).getBytes());
+        beginChat();
     }
 
     private void addCallingUser(String message) {

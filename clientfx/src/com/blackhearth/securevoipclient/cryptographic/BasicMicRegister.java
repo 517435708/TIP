@@ -39,7 +39,6 @@ public class BasicMicRegister implements MicRegister {
             microphone.open(audioFormat);
             microphone.start();
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | LineUnavailableException e) {
-            System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }

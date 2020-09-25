@@ -21,11 +21,6 @@ public class ApplicationConfig {
         return new RestTemplate();
     }
 
-    @Bean(name = "sendingData")
-    public BlockingQueue<byte[]> sendingData() {
-        return new LinkedBlockingQueue<>();
-    }
-
     @Bean(name = "callingUsers")
     public List<Pair<String, String>> callingUsers() {
         return new ArrayList<>();
