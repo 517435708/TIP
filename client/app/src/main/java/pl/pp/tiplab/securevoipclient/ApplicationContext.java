@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.crypto.Cipher;
 
@@ -38,7 +39,6 @@ public class ApplicationContext implements Runnable {
     private BasicClientData data;
     private AppCompatActivity context;
     private ButtonOnClickRegister register;
-
     private BlockingQueue<byte[]> receivedMessages;
     private BlockingQueue<byte[]> messagesToSend;
 
@@ -63,7 +63,9 @@ public class ApplicationContext implements Runnable {
         rsaCipher = Cipher.getInstance("RSA");
         aesBuilder = new StringBuilder();
 
+        buttons = new ArrayList<>();
         users = new ArrayList<>();
+        testForUsers();
         data = new BasicClientData();
         this.context = context;
     }
@@ -74,7 +76,23 @@ public class ApplicationContext implements Runnable {
 
     public void update() {
         swapper.swapToWaitingRoom();
-        context.runOnUiThread(this::updateUserInWaitingRoom);
+    }
+
+    private void testForUsers() {
+        new Thread(() -> {
+            while (true) {
+                int size = users.size();
+
+                while (size == users.size()) {
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                context.runOnUiThread(this::updateUserInWaitingRoom);
+            }
+        });
     }
 
     @SuppressLint("ResourceType")
@@ -113,9 +131,10 @@ public class ApplicationContext implements Runnable {
     private boolean examineData(String message) throws
                                                 Exception {
 
+        message = message.trim();
         // Najbardziej gówniany kod jaki w życiu napisałem. Kill me....
         if ("NOTIFY".equals(message)) {
-            updateUserInWaitingRoom();
+            update();
         } else if ("REJECT".equals(message)) {
             rejectTheCall();
         } else if (message.contains("CALLING")) {

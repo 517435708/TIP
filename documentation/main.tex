@@ -13,7 +13,7 @@
 \usepackage{float}
 
 \newcommand{\version}{v1.0.4}
-\newcommand{\lastPage}{13}
+\newcommand{\lastPage}{27}
 \newcommand{\tab}{\hspace{1cm}}
 \newcommand{\justy}[1]{
 \StrSubstitute{#1}{ }{ \hfill}
@@ -97,11 +97,8 @@
 	\input{niefunkcjonalne.tex}
 	\section{Technologie, narzędzia, środowisko, biblioteki, kodeki}
 	\input{narzedzia.tex}
-	\color{red}
 	\section{Opis najważniejszych protokołów}
-	W poniższym rozdziale przedstawimy najważniejsze, wg nas, protokoły składające się na naszą aplikację.
-	\input{protokoly.tex}
-	\color{black}
+	\input{protokolyy.tex}
 	\section{Ekrany}
 	\input{ekrany.tex}
 
@@ -111,6 +108,20 @@
 	\input{DPU.tex}
 	\subsection{Uproszczony diagram przepływu}
 	\input{flow.tex}
+	\subsection{Diagramy stanów}
+	\input{diagramystanow.tex}
+	\subsection{Diagram klas}
+	\input{klasy.tex}
 	\section{Implementacja serwera}
 	\input{server.tex}
+	\section{Implementacja klienta}
+	\input{klient.tex}
+	\section{Testy i przebieg sesji}
+	\input{testy.tex}
+	\section{Analiza bezpieczeństwa}
+	\input{analiza.tex}
+	\section{Podsumowanie}
+	\input{podsumowanie.tex}
+	\section{Podział prac}
+	\input{prace.tex}
 \end{document}

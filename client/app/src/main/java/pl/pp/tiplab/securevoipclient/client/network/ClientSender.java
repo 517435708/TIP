@@ -15,7 +15,7 @@ import static pl.pp.tiplab.securevoipclient.ApplicationConstants.APPLICATION_POR
 @AllArgsConstructor
 public class ClientSender implements Runnable {
 
-    private static final int SENDER_CLIENT_PORT = 7734;
+    private static final int SENDER_CLIENT_PORT = 12346;
     private BlockingQueue<byte[]> data;
 
     @Override

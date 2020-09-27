@@ -1,0 +1,358 @@
+@startuml
+
+title __CLIENTFX's Class Diagram__\n
+
+  namespace com.blackhearth.securevoipclient {
+    class com.blackhearth.securevoipclient.ApplicationConstants {
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    class com.blackhearth.securevoipclient.SecureVoipClient {
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      class com.blackhearth.securevoipclient.client.BasicClientData {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      interface com.blackhearth.securevoipclient.client.UserController {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace connection {
+        class com.blackhearth.securevoipclient.client.connection.BasicClientConnector {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace connection {
+        class com.blackhearth.securevoipclient.client.connection.ConnectionConstants {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace connection {
+        interface com.blackhearth.securevoipclient.client.connection.ConnectionService {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace connection {
+        namespace dto {
+          class com.blackhearth.securevoipclient.client.connection.dto.VoIPConnectionResponse {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace network {
+        class com.blackhearth.securevoipclient.client.network.ClientListen {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace network {
+        class com.blackhearth.securevoipclient.client.network.ClientSender {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace network {
+        class com.blackhearth.securevoipclient.client.network.DataInterpreter {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace network {
+        class com.blackhearth.securevoipclient.client.network.NetworkConstants {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace network {
+        class com.blackhearth.securevoipclient.client.network.NetworkException {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace register {
+        class com.blackhearth.securevoipclient.client.register.BasicClientRegister {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace register {
+        class com.blackhearth.securevoipclient.client.register.RegisterConstants {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace register {
+        class com.blackhearth.securevoipclient.client.register.RegisterException {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace register {
+        interface com.blackhearth.securevoipclient.client.register.RegisterService {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace register {
+        namespace dto {
+          class com.blackhearth.securevoipclient.client.register.dto.RegisterRequest {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace register {
+        namespace dto {
+          class com.blackhearth.securevoipclient.client.register.dto.RegisterResponse {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace user {
+        class com.blackhearth.securevoipclient.client.user.VoIPUser {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace waitingroom {
+        class com.blackhearth.securevoipclient.client.waitingroom.BasicWaitingRoomService {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace waitingroom {
+        class com.blackhearth.securevoipclient.client.waitingroom.WaitingRoomConstants {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace client {
+      namespace waitingroom {
+        interface com.blackhearth.securevoipclient.client.waitingroom.WaitingRoomService {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace configuration {
+      class com.blackhearth.securevoipclient.configuration.ApplicationConfig {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace configuration {
+      class com.blackhearth.securevoipclient.configuration.ClientConfig {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace configuration {
+      class com.blackhearth.securevoipclient.configuration.ContextSwapper {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace configuration {
+      class com.blackhearth.securevoipclient.configuration.PopUpConfig {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace cryptographic {
+      class com.blackhearth.securevoipclient.cryptographic.AudioConstants {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace cryptographic {
+      class com.blackhearth.securevoipclient.cryptographic.BasicMicRegister {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace cryptographic {
+      interface com.blackhearth.securevoipclient.cryptographic.MicRegister {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace rsa {
+      class com.blackhearth.securevoipclient.rsa.BasicConverter {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace rsa {
+      class com.blackhearth.securevoipclient.rsa.ConverterRuntimeException {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace rsa {
+      class com.blackhearth.securevoipclient.rsa.RSAGenerator {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace rsa {
+      class com.blackhearth.securevoipclient.rsa.Random128bit {
+      }
+    }
+  }
+  
+
+  namespace com.blackhearth.securevoipclient {
+    namespace rsa {
+      interface com.blackhearth.securevoipclient.rsa.RsaCoverter {
+      }
+    }
+  }
+  
+
+  com.blackhearth.securevoipclient.SecureVoipClient -up-|> javafx.application.Application
+  com.blackhearth.securevoipclient.client.connection.BasicClientConnector .up.|> com.blackhearth.securevoipclient.client.connection.ConnectionService
+  com.blackhearth.securevoipclient.client.network.ClientListen o-- com.blackhearth.securevoipclient.client.network.DataInterpreter : dataInterpreter
+  com.blackhearth.securevoipclient.client.network.DataInterpreter o-- com.blackhearth.securevoipclient.client.BasicClientData : clientData
+  com.blackhearth.securevoipclient.client.network.DataInterpreter o-- com.blackhearth.securevoipclient.client.network.ClientSender : clientSender
+  com.blackhearth.securevoipclient.client.network.DataInterpreter o-- com.blackhearth.securevoipclient.configuration.ContextSwapper : contextSwapper
+  com.blackhearth.securevoipclient.client.network.DataInterpreter o-- com.blackhearth.securevoipclient.cryptographic.MicRegister : micRegister
+  com.blackhearth.securevoipclient.client.register.BasicClientRegister .up.|> com.blackhearth.securevoipclient.client.register.RegisterService
+  com.blackhearth.securevoipclient.client.register.BasicClientRegister o-- com.blackhearth.securevoipclient.client.BasicClientData : data
+  com.blackhearth.securevoipclient.client.user.VoIPUser .up.|> java.io.Serializable
+  com.blackhearth.securevoipclient.client.waitingroom.BasicWaitingRoomService .up.|> com.blackhearth.securevoipclient.client.waitingroom.WaitingRoomService
+  com.blackhearth.securevoipclient.configuration.ContextSwapper o-- com.blackhearth.securevoipclient.client.BasicClientData : basicClientData
+  com.blackhearth.securevoipclient.configuration.ContextSwapper o-- com.blackhearth.securevoipclient.client.BasicClientData : clientData
+  com.blackhearth.securevoipclient.configuration.ContextSwapper o-- com.blackhearth.securevoipclient.client.network.ClientSender : clientSender
+  com.blackhearth.securevoipclient.configuration.ContextSwapper o-- com.blackhearth.securevoipclient.client.connection.ConnectionService : connectionService
+  com.blackhearth.securevoipclient.configuration.ContextSwapper o-- com.blackhearth.securevoipclient.client.waitingroom.WaitingRoomService : waitingRoomService
+  com.blackhearth.securevoipclient.configuration.PopUpConfig o-- com.blackhearth.securevoipclient.client.BasicClientData : basicClientData
+  com.blackhearth.securevoipclient.configuration.PopUpConfig o-- com.blackhearth.securevoipclient.configuration.ContextSwapper : contextSwapper
+  com.blackhearth.securevoipclient.configuration.PopUpConfig o-- com.blackhearth.securevoipclient.rsa.BasicConverter : converter
+  com.blackhearth.securevoipclient.configuration.PopUpConfig o-- com.blackhearth.securevoipclient.client.register.RegisterService : registerService
+  com.blackhearth.securevoipclient.configuration.PopUpConfig o-- com.blackhearth.securevoipclient.rsa.RSAGenerator : rsaGenerator
+  com.blackhearth.securevoipclient.configuration.PopUpConfig o-- com.blackhearth.securevoipclient.client.network.ClientSender : sending
+  com.blackhearth.securevoipclient.cryptographic.BasicMicRegister .up.|> com.blackhearth.securevoipclient.cryptographic.MicRegister
+  com.blackhearth.securevoipclient.rsa.BasicConverter .up.|> com.blackhearth.securevoipclient.rsa.RsaCoverter
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

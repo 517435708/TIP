@@ -52,6 +52,8 @@ public class BasicUserSessionService implements UserSessionService {
         session.setSessionId(UUID.randomUUID()
                                  .toString());
 
+        sessions.add(session);
+
         return session.getSessionId();
     }
 

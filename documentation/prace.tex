@@ -1,0 +1,25 @@
+Projekt został wykonany z często wspólnymi obowiązkami, podział prac prezentuje się następująco:
+
+\noindent Adrian Golczak: 
+\begin{itemize}
+	\item nadzorowanie prac projektu,
+	\item pisanie dokumentacji projektu,
+	\item stworzenie szkieletu serwera oraz klienta,
+	\item napisanie metod umożliwiających łączenie się użytkowników z serwerem, poczekalnią oraz samym sobą,
+	\item stworzenie ekranów poczekalni, rozmowy.
+\end{itemize}
+Marcin Kubiak:
+\begin{itemize}
+	\item pisanie dokumentacji projektu,
+	\item generowanie klucza publicznego, prywatnego,
+	\item przetwarzanie wysyłanych i odbieranych bajtów.	
+\end{itemize}
+
+\subsection{Cele zrealizowane}
+\justy{Z pewnością udała nam się negocjacja klucza AES 256 między użytkownikami rozpoczynającymi rozmowę, dodatkowo szyfrowanie i deszyfrowanie bajtów również działa prawidłowo. W trakcie prac udało się uzyskać połączenie między użytkownikami znajdującymi się w tej samej sieci, a sama rozmowa przebiega prawidłowo.}
+\subsection{Cele niezrealizowane}
+\justy{Nie udało nam się stworzyć aplikacji mobilnej tak jak wcześniej zakładaliśmy, przez co zabrakło czasu na dopracowanie pewnych elementów działającej aplikacji klienckiej opartej na JavaFX.}
+\subsection{Napotkane problemy}
+\justy{Wstępnie utworzony projekt klienta zakładał aplikację mobilną. Po napisaniu większej części funkcjonalności, okazało się, że wykorzystuje ona SDK 30 (najnowsza wersja), która jest obsługiwana jedynie przez niewielki procent rynku żaden z nas nie posiadał telefonu umożliwiającego debugowanie i testowanie aplikacji. Zapadła decyzja o tym aby przetestować to na emulatorach, jednakże i tutaj napotkaliśmy problemy. Emulatory w android studio są stawiane na wirtualnej maszynie (wymagającej akceleratora haxm), ta natomiast posiada własny wirtualny router i NAT. Istnieją dwie metody aby przekierować porty maszyny fizycznej (komputera) na porty emulatora, wykorzystuje się do tego albo most adb, albo bezpośrednio po połączeniu się dzięki telnetowi do emulatora można dodać poleceniem redir odpowiednie przekierowanie. Niestety i tutaj napotkaliśmy problemy, okazało się, że most umożliwia przekierowanie portów jedynie dla połączeń TCP (aby przekazywać głos przez internet użyliśmy protokołu UDP), natomiast polecenie redir działało jedynie na loopbacku hosta. To zmusiło mnie do napisania kolejnego programu który odbierał datagramy po stronie hosta, a następnie wysyłał je na loopback. Rozwiązanie karkołomne sprawiło, że utrata datagramów sięgała 60\% co sprawiało problemy chociażby z utworzeniem sesji i nawiązaniem połączenia. Czas ten został zmarnowany, próba naprawienia klienta androidowego została zarzucona, a cały projekt został przeorganizowany tak, aby klientem byłą aplikacja desktopowa napisana w JavaFX.}
+\subsection{Perspektywa rozwoju}
+\justy{W niedalekiej przyszłości warto zaimplementować algorytm logowania oraz odzyskiwania hasła. W tym wypadku będziemy potrzebowali bazę danych aby przechowywać loginy i hashe haseł użytkowników. Dodatkowo można rozszerzyć funkcjonalność aplikacji klienckiej o czat tekstowy w celu np. wysyłania linków.}
