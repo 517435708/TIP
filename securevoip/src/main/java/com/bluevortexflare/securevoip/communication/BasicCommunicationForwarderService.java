@@ -36,6 +36,7 @@ public class BasicCommunicationForwarderService implements CommunicationForwarde
             while (true) {
                 Arrays.fill(message, (byte)0);
                 DatagramPacket datagram = receiveDatagram();
+                System.out.println(new String(datagram.getData()));
                 if (!setUserInetAddressIfTokenReceived(datagram)) {
                     Optional<InetAddress> address = sessionService.getOppositeAddressFromSession(datagram);
                     address.ifPresent(this::forwardDatagram);

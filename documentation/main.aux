@@ -25,29 +25,43 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Diagramy stanów}{13}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces \centering  Diagram stanu dla dołączania użytkownika do poczekalni.\relax }}{13}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces \centering  Diagram stanu dla łączenia użytkowników i negocjacji klucza między nimi.\relax }}{14}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Diagram klas}{15}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}Implementacja serwera}{15}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}RegisterService}{15}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces \centering  Kody serwisu zarządzającego użytkownikami i poczekalnią.\relax }}{15}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}ConnectionService}{15}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces \centering  Klasa zarządzająca połączeniem użytkowników podczas próby rozmowy.\relax }}{16}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Implementacja klienta}{16}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}AudioConstants}{16}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces \centering  Stałe wykorzystywane przy cyfrowej obróbce dzwięku.\relax }}{17}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}BasicMicRegister}{17}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces \centering  Konstruktor BasicMicRegister.\relax }}{17}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}sendVoiceMessage}{18}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces \centering  Metoda odpowiedzialna za przesyłanie zaszyfrowanej wiadomości.\relax }}{18}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}receiveMessage}{18}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces \centering  Metoda receiveMessage.\relax }}{18}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10}Testy i przebieg sesji}{19}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {11}Analiza bezpieczeństwa}{19}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {12}Podsumowanie}{19}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {13}Podział prac}{19}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {13.1}Cele zrealizowane}{20}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {13.2}Cele niezrealizowane}{20}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {13.3}Napotkane problemy}{20}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {13.4}Perspektywa rozwoju}{20}\protected@file@percent }
-\newlabel{LastPage}{{}{20}}
-\xdef\lastpage@lastpage{20}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Diagram klas}{14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.4.1}Diagramy klas klienta}{15}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces \centering  Diagram klas serwisu łączącego dwóch klientów.\relax }}{15}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces \centering  Diagram klas połączenia UDP pomiędzy dwoma klientami.\relax }}{15}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces \centering  Diagram klas sewrisu rejestrującego nowego użytkownika.\relax }}{16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces \centering  Diagram klas serwisu pobierającego listę użytkowników z serwera.\relax }}{16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces \centering  Diagram klas danych użytkownika.\relax }}{17}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces \centering  Diagram klas konfiguracji klienta.\relax }}{17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.4.2}Diagramy klas serwera}{18}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces \centering  Diagram klas połączenia UDP pomiędzy serwerem a klientem.\relax }}{18}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces \centering  Diagram klas wyjątków serwera.\relax }}{18}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces \centering  Diagram klas serwisu zarządzającego sesjami użytkowników.\relax }}{19}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces \centering  Diagram klas serwisu zarządzającego połączeniem pomiędzy użykownikami.\relax }}{19}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces \centering  Diagram klas ilustrujący zależność pomiędzy kontrolerem użytkownika, a serwisem rejestrującym.\relax }}{19}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces \centering  Diagram klas serwisu rejestrującego.\relax }}{20}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Implementacja serwera}{20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}RegisterService}{20}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces \centering  Kody serwisu zarządzającego użytkownikami i poczekalnią.\relax }}{21}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}ConnectionService}{21}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces \centering  Klasa zarządzająca połączeniem użytkowników podczas próby rozmowy.\relax }}{22}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Implementacja klienta}{22}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}AudioConstants}{22}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces \centering  Stałe wykorzystywane przy cyfrowej obróbce dzwięku.\relax }}{23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}BasicMicRegister}{23}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces \centering  Konstruktor BasicMicRegister.\relax }}{23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}sendVoiceMessage}{24}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces \centering  Metoda odpowiedzialna za przesyłanie zaszyfrowanej wiadomości.\relax }}{24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}receiveMessage}{24}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces \centering  Metoda receiveMessage.\relax }}{24}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Testy i przebieg sesji}{25}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Analiza bezpieczeństwa}{25}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12}Podsumowanie}{25}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13}Podział prac}{25}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.1}Cele zrealizowane}{26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.2}Cele niezrealizowane}{26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.3}Napotkane problemy}{26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.4}Perspektywa rozwoju}{27}\protected@file@percent }
+\newlabel{LastPage}{{}{27}}
+\xdef\lastpage@lastpage{27}
 \gdef\lastpage@lastpageHy{}

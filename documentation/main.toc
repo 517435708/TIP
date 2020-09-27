@@ -13,20 +13,22 @@
 \contentsline {subsection}{\numberline {7.1}Diagram przypadków użycia}{11}%
 \contentsline {subsection}{\numberline {7.2}Uproszczony diagram przepływu}{11}%
 \contentsline {subsection}{\numberline {7.3}Diagramy stanów}{13}%
-\contentsline {subsection}{\numberline {7.4}Diagram klas}{15}%
-\contentsline {section}{\numberline {8}Implementacja serwera}{15}%
-\contentsline {subsection}{\numberline {8.1}RegisterService}{15}%
-\contentsline {subsection}{\numberline {8.2}ConnectionService}{15}%
-\contentsline {section}{\numberline {9}Implementacja klienta}{16}%
-\contentsline {subsection}{\numberline {9.1}AudioConstants}{16}%
-\contentsline {subsection}{\numberline {9.2}BasicMicRegister}{17}%
-\contentsline {subsection}{\numberline {9.3}sendVoiceMessage}{18}%
-\contentsline {subsection}{\numberline {9.4}receiveMessage}{18}%
-\contentsline {section}{\numberline {10}Testy i przebieg sesji}{19}%
-\contentsline {section}{\numberline {11}Analiza bezpieczeństwa}{19}%
-\contentsline {section}{\numberline {12}Podsumowanie}{19}%
-\contentsline {section}{\numberline {13}Podział prac}{19}%
-\contentsline {subsection}{\numberline {13.1}Cele zrealizowane}{20}%
-\contentsline {subsection}{\numberline {13.2}Cele niezrealizowane}{20}%
-\contentsline {subsection}{\numberline {13.3}Napotkane problemy}{20}%
-\contentsline {subsection}{\numberline {13.4}Perspektywa rozwoju}{20}%
+\contentsline {subsection}{\numberline {7.4}Diagram klas}{14}%
+\contentsline {subsubsection}{\numberline {7.4.1}Diagramy klas klienta}{15}%
+\contentsline {subsubsection}{\numberline {7.4.2}Diagramy klas serwera}{18}%
+\contentsline {section}{\numberline {8}Implementacja serwera}{20}%
+\contentsline {subsection}{\numberline {8.1}RegisterService}{20}%
+\contentsline {subsection}{\numberline {8.2}ConnectionService}{21}%
+\contentsline {section}{\numberline {9}Implementacja klienta}{22}%
+\contentsline {subsection}{\numberline {9.1}AudioConstants}{22}%
+\contentsline {subsection}{\numberline {9.2}BasicMicRegister}{23}%
+\contentsline {subsection}{\numberline {9.3}sendVoiceMessage}{24}%
+\contentsline {subsection}{\numberline {9.4}receiveMessage}{24}%
+\contentsline {section}{\numberline {10}Testy i przebieg sesji}{25}%
+\contentsline {section}{\numberline {11}Analiza bezpieczeństwa}{25}%
+\contentsline {section}{\numberline {12}Podsumowanie}{25}%
+\contentsline {section}{\numberline {13}Podział prac}{25}%
+\contentsline {subsection}{\numberline {13.1}Cele zrealizowane}{26}%
+\contentsline {subsection}{\numberline {13.2}Cele niezrealizowane}{26}%
+\contentsline {subsection}{\numberline {13.3}Napotkane problemy}{26}%
+\contentsline {subsection}{\numberline {13.4}Perspektywa rozwoju}{27}%

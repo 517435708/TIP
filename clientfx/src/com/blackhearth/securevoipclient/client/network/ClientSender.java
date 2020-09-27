@@ -22,6 +22,7 @@ public class ClientSender {
     private static final int SENDER_CLIENT_PORT = 12346;
 
     public void put(byte[] data) {
+        System.out.println(new String(data));
         try (DatagramSocket udpSocket = new DatagramSocket(SENDER_CLIENT_PORT)) {
             InetAddress serverAddress = InetAddress.getByName(APPLICATION_HOST);
             sendMessageIfNotNull(data, serverAddress, udpSocket);
